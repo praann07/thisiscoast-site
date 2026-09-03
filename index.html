@@ -586,26 +586,27 @@
   function startHeroAnim() {
     var cv = document.getElementById('ribbon');
     if (!cv || typeof THREE === 'undefined') return;
-    // Small / low-power devices keep the plain CSS ink gradient instead.
-    if (window.innerWidth < 640) return;
-    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return;
+    // Only skip on genuinely ancient / 1-2 core devices; phones run it fine.
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return;
 
     var renderer;
     try { renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true }); }
     catch (e) { console.warn('[coast] hero animation disabled:', e && e.message); return; }
 
     var W = hero.clientWidth, H = hero.clientHeight;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    var narrow = W < 760;   // phone / portrait — lighter + re-framed
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, narrow ? 1.5 : 2));
     renderer.setSize(W, H, false);
 
     var FOG_OPEN = 0.036, FOG_DENSE = 0.14;
     var scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x0e0f13, FOG_DENSE);
 
-    // Framed toward the right half — the copy lives on the left.
-    var camera = new THREE.PerspectiveCamera(44, W / H, 0.1, 100);
-    camera.position.set(0, 0.5, 6.1);
-    camera.lookAt(1.15, 0.55, -1.7);
+    // Desktop: framed to the right (copy sits left). Phone: wider FOV, pulled
+    // back and centred so the converging route reads behind the stacked text.
+    var camera = new THREE.PerspectiveCamera(narrow ? 54 : 44, W / H, 0.1, 100);
+    camera.position.set(narrow ? 0.3 : 0, narrow ? 0.15 : 0.5, narrow ? 7.6 : 6.1);
+    camera.lookAt(narrow ? 0.5 : 1.15, narrow ? 0.35 : 0.55, -1.8);
 
     var group = new THREE.Group();
     scene.add(group);
@@ -696,7 +697,7 @@
     }));
     pulse.position.copy(MERGE); pulse.scale.set(0.1, 0.1, 1); group.add(pulse);
 
-    var NP = 70, pg = new THREE.BufferGeometry(), pArr = new Float32Array(NP * 3), pPh = new Float32Array(NP);
+    var NP = narrow ? 34 : 70, pg = new THREE.BufferGeometry(), pArr = new Float32Array(NP * 3), pPh = new Float32Array(NP);
     for (var i = 0; i < NP; i++) {
       var b = (i % 2 ? curveR : shared).getPointAt(Math.random());
       pArr[i*3]   = b.x + (Math.random() - 0.5) * 1.7;
