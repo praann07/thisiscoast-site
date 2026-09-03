@@ -146,6 +146,8 @@
 
     /* ---------- STORY BEATS (paper) ---------- */
     .beat { padding:clamp(84px,7vw,140px) 0; position:relative; }
+    .beat.beat-tight { padding:clamp(60px,5vw,96px) 0; }
+    .beat-tight .beat-head { margin-bottom:0; }
     .beat-head { max-width:36rem; margin-bottom:52px; }
     .beat-head h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
     .beat-lead { margin:16px 0 0; color:var(--text-2); font-size:1.06rem; max-width:34rem; }
@@ -511,19 +513,12 @@
 </section>
 
 <!-- ================= BEAT 2 — you choose ================= -->
-<section class="beat" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="wrap beat-2-grid">
-    <div class="rise">
+<section class="beat beat-tight" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="beat-head rise">
       <p class="eyebrow">You choose</p>
       <h2>See who's near. Pick who.</h2>
-      <p class="beat-lead">Nobody is assigned to you. You see who's going your way, with their name and rating, and decide who to ask.</p>
-    </div>
-    <div class="panel rise" aria-hidden="true">
-      <div class="panel-map"><span class="rt"></span><span class="p l"></span><span class="p r"></span></div>
-      <div class="panel-lbl"><span>Nearby now</span><span>within 5 km</span></div>
-      <div class="ride"><span class="av">P</span><span><span class="who">Priya</span><span class="mt">HITEC City · 9:15 AM</span></span><span class="st">2 seats</span></div>
-      <div class="ride"><span class="av">A</span><span><span class="who">Aisha<span class="wo">women only</span></span><span class="mt">Gachibowli · 9:20 AM</span></span><span class="st">3 seats</span></div>
-      <div class="ride"><span class="av">R</span><span><span class="who">Rahul</span><span class="mt">Ameerpet Metro · 9:30 AM</span></span><span class="st">1 seat</span></div>
+      <p class="beat-lead">Nobody is assigned to you. You see who's going your way &mdash; their name, their rating, where they're headed &mdash; and decide who to ask. That's the whole difference.</p>
     </div>
   </div>
 </section>
