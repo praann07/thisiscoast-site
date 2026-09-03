@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coast — Share the ride with someone already going your way</title>
-  <meta name="description" content="Coast shows you who's heading where you're heading, right now, near you. You choose who to ride with and split the fare. No dispatch, no assigned stranger, no payments through the app. Android, India." />
-  <meta name="keywords" content="ride sharing, carpool, share ride, split fare, proximity matching, commute, India, privacy" />
+  <meta name="description" content="You're going somewhere. So is someone nearby. Coast puts you on the same ride — you choose who, split the fare, and your location and number stay yours. Android, India." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Coast" />
   <link rel="canonical" href="https://coastnow.in/" />
@@ -14,588 +13,440 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://coastnow.in/" />
   <meta property="og:title" content="Coast — Share the ride with someone already going your way" />
-  <meta property="og:description" content="See who's headed your way, pick who to ride with, split the fare. Privacy-first. Android, India." />
+  <meta property="og:description" content="You choose who to ride with. Your location and number stay yours. No payments through the app." />
   <meta property="og:image" content="https://coastnow.in/og-image.png" />
   <meta property="og:site_name" content="Coast" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Coast — Share the ride with someone already going your way" />
-  <meta name="twitter:description" content="See who's headed your way, pick who to ride with, split the fare. Privacy-first." />
   <meta name="twitter:image" content="https://coastnow.in/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script>document.documentElement.classList.add('js');</script>
 
   <style>
     :root {
-      --paper: #F6F4F1;
-      --card: #FFFFFF;
-      --ink: #0E0F13;
-      --ink-surface: #1B1D24;
-      --ink-border: #2A2D37;
-      --teal: #0F7C7A;
-      --teal-deep: #0A5F5D;
-      --teal-tint: #E4EFEE;
-      --text: #1A1B1E;
-      --text-2: #56585F;
-      --text-3: #8A8D95;
-      --hair: #E6E2DC;
-      --success: #1E9E5B;
-      --danger: #D8432B;
-      --shadow-card: 0 1px 2px rgba(14,15,19,.04), 0 10px 30px -12px rgba(14,15,19,.12);
-      --maxw: 1140px;
+      --paper:#F6F4F1; --card:#FFFFFF;
+      --ink:#0E0F13; --ink-2:#1B1D24; --ink-line:#2A2D37;
+      --teal:#0F7C7A; --teal-deep:#0A5F5D; --teal-soft:#E4EFEE; --teal-lift:#2FB9B5;
+      --text:#1A1B1E; --text-2:#56585F; --text-3:#8A8D95;
+      --line:#E6E2DC;
+      --maxw:1160px;
+      --ease:cubic-bezier(.2,.7,.2,1);
     }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--text);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 17px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      margin:0; background:var(--paper); color:var(--text);
+      font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
     }
-
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-
-    h1, h2, h3 {
-      font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
-      font-weight: 400;
-      letter-spacing: .01em;
-      line-height: 1.08;
-      text-wrap: balance;
-      margin: 0;
+    h1,h2,h3 {
+      font-family:"Instrument Serif",Georgia,serif; font-weight:400;
+      line-height:1.06; letter-spacing:.01em; margin:0; text-wrap:balance;
     }
-
+    .wrap { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
     .eyebrow {
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--teal-deep);
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--teal-deep); margin:0;
     }
+    a { color:inherit; }
+    button { font:inherit; cursor:pointer; }
+    :focus-visible { outline:2px solid var(--teal); outline-offset:3px; border-radius:4px; }
 
-    a { color: inherit; }
-
-    /* ---------- Nav ---------- */
+    /* ---------- NAV ---------- */
     #nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: color-mix(in srgb, var(--paper) 88%, transparent);
-      backdrop-filter: saturate(140%) blur(10px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .2s ease, background .2s ease;
-    }
-    #nav.scrolled { border-bottom-color: var(--hair); }
-    .nav-inner {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position:fixed; inset:0 0 auto 0; z-index:40;
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:var(--maxw); margin:0 auto; padding:16px 24px;
+      transition:padding .3s var(--ease);
     }
     .logo {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-style: italic;
-      font-size: 26px;
-      text-decoration: none;
-      color: var(--text);
-      letter-spacing: .02em;
+      font-family:"Instrument Serif",serif; font-style:italic; font-size:26px;
+      color:#fff; text-decoration:none; letter-spacing:.02em;
+      transition:color .4s var(--ease);
     }
-    .nav-btn {
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      color: #fff;
-      background: var(--teal);
-      padding: 9px 18px;
-      border-radius: 999px;
-      transition: background .15s ease, transform .15s ease;
+    #nav.past-hero .logo { color:var(--text); }
+    .nav-cta {
+      font-size:13.5px; font-weight:600; text-decoration:none; color:#fff;
+      border:1px solid rgba(255,255,255,.28); padding:8px 16px; border-radius:999px;
+      transition:background .2s var(--ease), border-color .2s var(--ease), color .4s var(--ease);
     }
-    .nav-btn:hover { background: var(--teal-deep); transform: translateY(-1px); }
+    .nav-cta:hover { background:rgba(255,255,255,.12); }
+    #nav.past-hero .nav-cta { color:#fff; background:var(--teal); border-color:var(--teal); }
+    #nav.past-hero .nav-cta:hover { background:var(--teal-deep); }
 
-    /* ---------- Hero ---------- */
-    #hero { padding: 72px 0 88px; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 64px;
-      align-items: center;
+    /* ---------- HERO (dark beat) ---------- */
+    #hero {
+      position:relative; min-height:100svh; display:flex; align-items:center;
+      background:radial-gradient(120% 90% at 72% 20%, #1a232b 0%, #12181e 45%, var(--ink) 100%);
+      color:#fff; overflow:hidden;
     }
+    #ribbon {
+      position:absolute; inset:0; width:100%; height:100%;
+      display:block; z-index:1;
+    }
+    #hero .wrap { position:relative; z-index:2; width:100%; padding-top:96px; padding-bottom:96px; }
+    #hero .eyebrow { color:#6FBFBC; }
     .hero-title {
-      font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.3rem);
-      margin: 18px 0 0;
+      font-size:clamp(2.9rem,1.8rem+4.4vw,5.2rem);
+      margin:18px 0 0; max-width:16ch;
     }
-    .hero-title em { font-style: italic; color: var(--teal-deep); }
+    .hero-title em { font-style:italic; color:var(--teal-lift); }
     .hero-sub {
-      margin: 22px 0 0;
-      font-size: 1.075rem;
-      color: var(--text-2);
-      max-width: 30rem;
+      margin:22px 0 0; max-width:32rem; font-size:1.05rem; color:rgba(255,255,255,.72);
     }
-    .hero-form { margin-top: 30px; max-width: 30rem; }
-    .input-group {
-      display: flex;
-      gap: 8px;
-      background: var(--card);
-      border: 1px solid var(--hair);
-      border-radius: 14px;
-      padding: 6px;
-      box-shadow: var(--shadow-card);
+    .hero-form { margin-top:34px; max-width:30rem; }
+    .field {
+      display:flex; gap:8px; background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:6px;
+      backdrop-filter:blur(6px);
     }
-    .input-group input {
-      flex: 1;
-      border: 0;
-      background: transparent;
-      padding: 12px 14px;
-      font: inherit;
-      font-size: 15px;
-      color: var(--text);
-      outline: none;
-      min-width: 0;
+    .field input {
+      flex:1; min-width:0; border:0; background:transparent; color:#fff;
+      font:inherit; font-size:15px; padding:12px 14px; outline:none;
     }
+    .field input::placeholder { color:rgba(255,255,255,.5); }
     .btn {
-      border: 0;
-      cursor: pointer;
-      font: inherit;
-      font-weight: 600;
-      font-size: 15px;
-      color: #fff;
-      background: var(--teal);
-      border-radius: 10px;
-      padding: 12px 20px;
-      white-space: nowrap;
-      transition: background .15s ease;
+      border:0; font-weight:600; font-size:15px; color:#fff; background:var(--teal);
+      border-radius:10px; padding:12px 22px; white-space:nowrap;
+      transition:background .15s var(--ease), transform .15s var(--ease);
     }
-    .btn:hover { background: var(--teal-deep); }
-    .form-footnote { margin: 12px 2px 0; font-size: 13px; color: var(--text-3); }
+    .btn:hover { background:var(--teal-deep); transform:translateY(-1px); }
+    .hero-foot {
+      margin:14px 4px 0; font-size:12.5px; letter-spacing:.02em;
+      color:rgba(255,255,255,.42);
+      font-family:"IBM Plex Mono",monospace;
+    }
+    .scrollcue {
+      position:absolute; left:50%; bottom:26px; transform:translateX(-50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:7px;
+      font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.22em;
+      text-transform:uppercase; color:rgba(255,255,255,.4);
+    }
+    .scrollcue i {
+      width:1px; height:34px; background:linear-gradient(rgba(255,255,255,.5),transparent);
+      animation:cue 2.4s var(--ease) infinite;
+    }
+    @keyframes cue { 0%{transform:scaleY(0);transform-origin:top} 40%{transform:scaleY(1);transform-origin:top} 60%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
-    /* ---------- App panel mock (the signature) ---------- */
+    /* ---------- STORY BEATS (paper) ---------- */
+    .beat { padding:clamp(84px,7vw,140px) 0; position:relative; }
+    .beat-head { max-width:36rem; margin-bottom:52px; }
+    .beat-head h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
+    .beat-lead { margin:16px 0 0; color:var(--text-2); font-size:1.06rem; max-width:34rem; }
+
+    /* Beat 1 — merge diagram */
+    .merge { display:block; width:100%; max-width:760px; margin:0 auto; height:auto; }
+    .js .merge .draw {
+      stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600);
+      transition:stroke-dashoffset 1.4s var(--ease);
+    }
+    .js .merge.in .draw { stroke-dashoffset:0; }
+    .js .merge .pop { opacity:0; transform:scale(.4); transform-origin:center; transition:opacity .5s var(--ease) .9s, transform .5s var(--ease) .9s; }
+    .js .merge.in .pop { opacity:1; transform:scale(1); }
+
+    /* Beat 2 — app panel */
+    .beat-2-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
     .panel {
-      background: var(--ink);
-      border-radius: 26px;
-      padding: 14px;
-      box-shadow: 0 30px 70px -24px rgba(14,15,19,.4);
+      background:var(--ink); border-radius:26px; padding:14px;
+      box-shadow:0 40px 90px -30px rgba(14,15,19,.45); max-width:420px;
     }
-    .panel-map {
-      position: relative;
-      height: 168px;
-      border-radius: 16px;
-      overflow: hidden;
-      background:
-        radial-gradient(120% 120% at 20% 15%, #23303a 0%, #182028 55%, #12181e 100%);
-    }
-    .panel-map::before {
-      content: "";
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .route {
-      position: absolute;
-      left: 16%; right: 22%; top: 58%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--teal) 30%, var(--teal) 70%, transparent);
-      border-radius: 3px;
-    }
-    .pin {
-      position: absolute;
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 0 0 5px color-mix(in srgb, var(--teal) 28%, transparent);
-    }
-    .pin.a { left: 15%; top: 54%; }
-    .pin.b { right: 21%; top: 54%; background: #fff; box-shadow: 0 0 0 5px rgba(255,255,255,.18); }
-    .panel-label {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 8px 10px;
-    }
-    .panel-label span {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-      color: #7C808C;
-    }
-    .ride {
-      display: grid;
-      grid-template-columns: 34px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      background: var(--ink-surface);
-      border: 1px solid var(--ink-border);
-      border-radius: 14px;
-      padding: 12px;
-      margin-top: 8px;
-    }
-    .ride .av {
-      width: 34px; height: 34px; border-radius: 50%;
-      display: grid; place-items: center;
-      font-family: "Instrument Serif", serif;
-      font-size: 15px; color: #fff;
-      background: #2E3A44;
-    }
-    .ride .who { color: #EDEEF0; font-size: 14px; font-weight: 500; }
-    .ride .meta { color: #8A8D95; font-size: 12px; margin-top: 1px; }
-    .ride .seats {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 11px; color: var(--teal);
-      border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
-      border-radius: 999px; padding: 3px 8px;
-    }
-    .ride .tag-wo {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
-      color: #E6B8AE;
-      border: 1px solid rgba(216,67,43,.4);
-      border-radius: 999px; padding: 2px 7px;
-    }
+    .panel-map { position:relative; height:150px; border-radius:16px; overflow:hidden;
+      background:radial-gradient(120% 120% at 20% 15%,#23303a,#182028 55%,#12181e); }
+    .panel-map::before { content:""; position:absolute; inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+      background-size:26px 26px; }
+    .panel-map .rt { position:absolute; left:14%; right:20%; top:56%; height:3px; border-radius:3px;
+      background:linear-gradient(90deg,transparent,var(--teal) 28%,var(--teal-lift) 72%,transparent); }
+    .panel-map .p { position:absolute; width:11px; height:11px; border-radius:50%; background:var(--teal-lift);
+      box-shadow:0 0 0 5px rgba(47,185,181,.22); top:52%; }
+    .panel-map .p.l { left:13%; } .panel-map .p.r { right:19%; background:#fff; box-shadow:0 0 0 5px rgba(255,255,255,.16); }
+    .panel-lbl { display:flex; justify-content:space-between; padding:15px 8px 8px;
+      font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:#7C808C; }
+    .ride { display:grid; grid-template-columns:32px 1fr auto; gap:11px; align-items:center;
+      background:var(--ink-2); border:1px solid var(--ink-line); border-radius:13px; padding:11px; margin-top:7px; }
+    .ride .av { width:32px; height:32px; border-radius:50%; display:grid; place-items:center;
+      font-family:"Instrument Serif",serif; font-size:14px; color:#fff; background:#2E3A44; }
+    .ride .who { color:#EDEEF0; font-size:13.5px; font-weight:500; }
+    .ride .mt { color:#8A8D95; font-size:11.5px; margin-top:1px; }
+    .ride .st { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--teal-lift);
+      border:1px solid rgba(47,185,181,.4); border-radius:999px; padding:3px 8px; white-space:nowrap; }
+    .ride .wo { font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
+      color:#E6B8AE; border:1px solid rgba(216,67,43,.4); border-radius:999px; padding:2px 6px; margin-left:6px; }
 
-    /* ---------- Sections ---------- */
-    section.band { padding: 84px 0; }
-    .section-head { max-width: 34rem; margin-bottom: 44px; }
-    .section-head h2 { font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); margin-top: 10px; }
-    .section-head p { color: var(--text-2); margin: 14px 0 0; }
+    /* Beat 3 — route of steps */
+    .steps { position:relative; }
+    .steps-line { position:absolute; left:0; right:0; top:28px; height:2px;
+      background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 13px); }
+    .js .steps-line::after { content:""; position:absolute; inset:0; background:var(--teal);
+      transform:scaleX(0); transform-origin:left; transition:transform 1.6s var(--ease); }
+    .js .steps.in .steps-line::after { transform:scaleX(1); }
+    .steps-row { position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+    .step { text-align:left; }
+    .step .node {
+      width:56px; height:56px; border-radius:50%; background:var(--card);
+      border:1px solid var(--line); display:grid; place-items:center; color:var(--teal-deep);
+      box-shadow:0 1px 2px rgba(14,15,19,.04);
+    }
+    .step h3 { font-size:1.18rem; margin:16px 0 4px; }
+    .step p { margin:0; font-size:13.5px; color:var(--text-3); font-family:"IBM Plex Mono",monospace; letter-spacing:.02em; }
 
-    /* Contrast cards */
-    .contrasts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .contrast {
-      background: var(--card);
-      border: 1px solid var(--hair);
-      border-radius: 18px;
-      padding: 26px 24px;
-      box-shadow: var(--shadow-card);
-    }
-    .contrast .k {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--text-3);
-    }
-    .contrast h3 { font-size: 1.5rem; margin: 12px 0 8px; }
-    .contrast p { margin: 0; font-size: 15px; color: var(--text-2); }
-    .contrast .usual {
-      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--hair);
-      font-size: 13.5px; color: var(--text-3);
-    }
-    .contrast .usual b { color: var(--text-2); font-weight: 600; }
+    /* Beat 4 — yours stays yours (dark) */
+    #privacy { background:var(--ink); color:#E9EAEC; }
+    #privacy .eyebrow { color:#6FBFBC; }
+    #privacy .beat-lead { color:#9A9DA5; }
+    .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+      border:1px solid var(--ink-line); border-radius:20px; overflow:hidden; }
+    .tile { background:var(--ink-2); padding:30px 26px; }
+    .tile .fig { height:96px; display:grid; place-items:center; margin-bottom:16px; }
+    .tile h3 { font-size:1.15rem; color:#fff; }
+    .tile p { margin:6px 0 0; font-size:13px; color:#9A9DA5; }
+    .fuzz-pin { position:relative; width:96px; height:96px; }
+    .fuzz-pin .ring { position:absolute; inset:0; border:1px dashed rgba(47,185,181,.5); border-radius:50%; }
+    .fuzz-pin .dot { position:absolute; left:50%; top:50%; width:14px; height:14px; margin:-7px 0 0 -3px;
+      background:var(--teal-lift); border-radius:50% 50% 50% 0; transform:rotate(-45deg); filter:blur(1.4px); }
+    .fuzz-pin .m { position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
+      font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.1em; color:#6FBFBC; }
 
-    /* Steps — a real sequence, so numbered */
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .step .n {
-      font-family: "Instrument Serif", serif;
-      font-size: 2.4rem;
-      color: var(--teal);
-      line-height: 1;
-    }
-    .step h3 { font-size: 1.2rem; margin: 10px 0 6px; }
-    .step p { margin: 0; font-size: 14.5px; color: var(--text-2); }
+    /* ---------- CTA ---------- */
+    #cta { background:var(--teal); color:#fff; }
+    #cta .box { text-align:center; padding:clamp(56px,6vw,90px) 0; }
+    #cta .eyebrow { color:rgba(255,255,255,.68); }
+    #cta h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
+    #cta .lead { margin:14px auto 0; max-width:28rem; color:rgba(255,255,255,.85); }
+    .cta-form { max-width:30rem; margin:30px auto 0; display:flex; flex-direction:column; gap:8px; }
+    .cta-form .two { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .cta-form input { width:100%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.13);
+      color:#fff; border-radius:11px; padding:13px 14px; font:inherit; font-size:15px; outline:none; }
+    .cta-form input::placeholder { color:rgba(255,255,255,.62); }
+    .cta-form input:focus { border-color:#fff; background:rgba(255,255,255,.2); }
+    .cta-form .btn { width:100%; background:var(--ink); }
+    .cta-form .btn:hover { background:#000; }
+    #wl-message { min-height:18px; margin:10px 0 0; font-size:13px; color:rgba(255,255,255,.72); }
+    .cta-stats { display:flex; align-items:center; justify-content:center; gap:24px;
+      margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.22); }
+    .cta-stats .n { font-family:"Instrument Serif",serif; font-size:1.7rem; display:block; }
+    .cta-stats .l { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.62); }
+    .cta-stats i { width:1px; height:32px; background:rgba(255,255,255,.24); }
 
-    /* Safety — dark beat, echoing the app's match screen */
-    #safety { background: var(--ink); color: #E9EAEC; }
-    #safety .eyebrow { color: #6FB8B5; }
-    #safety h2 { color: #fff; }
-    #safety .section-head p { color: #9A9DA5; }
-    .safety-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; border: 1px solid var(--ink-border); border-radius: 18px; overflow: hidden; }
-    .safety-item { background: var(--ink-surface); padding: 22px 24px; }
-    .safety-item h3 { font-size: 1.15rem; color: #fff; margin-bottom: 6px; }
-    .safety-item p { margin: 0; font-size: 14px; color: #9A9DA5; }
+    /* ---------- FOOTER ---------- */
+    footer { background:var(--ink); color:rgba(255,255,255,.5); padding:40px 0 52px; }
+    .foot { display:flex; flex-wrap:wrap; gap:16px 28px; align-items:center; justify-content:space-between; }
+    .foot .logo { color:#fff; font-size:22px; }
+    .foot nav { display:flex; flex-wrap:wrap; gap:20px; }
+    .foot a { font-size:13.5px; color:rgba(255,255,255,.62); text-decoration:none; }
+    .foot a:hover { color:#fff; }
 
-    /* Waitlist */
-    #waitlist .box {
-      background: var(--teal);
-      color: #fff;
-      border-radius: 26px;
-      padding: 56px 40px;
-      text-align: center;
-    }
-    #waitlist .eyebrow { color: rgba(255,255,255,.7); }
-    #waitlist h2 { color: #fff; font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); margin-top: 10px; }
-    #waitlist p.lead { color: rgba(255,255,255,.82); max-width: 30rem; margin: 14px auto 0; }
-    .wl-form { margin: 28px auto 0; max-width: 30rem; }
-    .wl-rows { display: flex; flex-direction: column; gap: 8px; }
-    .wl-rows .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .wl-form input {
-      width: 100%;
-      border: 1px solid rgba(255,255,255,.28);
-      background: rgba(255,255,255,.12);
-      color: #fff;
-      border-radius: 11px;
-      padding: 13px 14px;
-      font: inherit; font-size: 15px;
-      outline: none;
-    }
-    .wl-form input::placeholder { color: rgba(255,255,255,.6); }
-    .wl-form input:focus { border-color: #fff; background: rgba(255,255,255,.18); }
-    .wl-form .btn {
-      width: 100%;
-      background: var(--ink);
-      margin-top: 2px;
-    }
-    .wl-form .btn:hover { background: #000; }
-    #wl-message { min-height: 18px; margin: 10px 0 0; font-size: 13px; color: rgba(255,255,255,.7); }
-    .wl-stats {
-      display: flex; align-items: center; justify-content: center; gap: 26px;
-      margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2);
-    }
-    .wl-stat .num { font-family: "Instrument Serif", serif; font-size: 1.7rem; display: block; }
-    .wl-stat .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); }
-    .wl-div { width: 1px; height: 34px; background: rgba(255,255,255,.24); }
+    /* reveal */
+    .js .rise { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+    .js .rise.in { opacity:1; transform:none; }
 
-    /* Footer */
-    footer { padding: 40px 0 56px; border-top: 1px solid var(--hair); }
-    .foot-inner { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; justify-content: space-between; }
-    .foot-inner .c { font-size: 13.5px; color: var(--text-3); }
-    .foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
-    .foot-links a { font-size: 13.5px; color: var(--text-2); text-decoration: none; }
-    .foot-links a:hover { color: var(--teal-deep); }
+    #toast { position:fixed; left:50%; bottom:26px; transform:translate(-50%,18px); z-index:100;
+      background:var(--ink); color:#fff; padding:13px 20px; border-radius:12px; font-size:14px;
+      opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
+      max-width:calc(100vw - 40px); }
+    #toast.show { opacity:1; transform:translate(-50%,0); }
+    #toast.error { background:#D8432B; }
 
-    /* Reveal on scroll (IntersectionObserver adds .visible). Gated on .js so
-       that with JavaScript disabled or broken, nothing is left invisible. */
-    .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-    .js .reveal.visible { opacity: 1; transform: none; }
-
-    /* Toast */
-    #toast {
-      position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
-      background: var(--ink); color: #fff;
-      padding: 13px 20px; border-radius: 12px; font-size: 14px;
-      opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
-      z-index: 100; max-width: calc(100vw - 40px);
+    @media (max-width:860px) {
+      .beat-2-grid { grid-template-columns:1fr; gap:40px; }
+      .panel { margin:0 auto; }
+      .steps-row { grid-template-columns:1fr 1fr; gap:32px 24px; }
+      .steps-line { display:none; }
+      .tiles { grid-template-columns:1fr; }
     }
-    #toast.show { opacity: 1; transform: translate(-50%, 0); }
-    #toast.error { background: var(--danger); }
-
-    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
-
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 44px; }
-      .panel { max-width: 420px; }
-      .contrasts { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .safety-list { grid-template-columns: 1fr; }
+    @media (max-width:520px) {
+      #hero .wrap { padding-top:88px; }
+      .field { flex-direction:column; }
+      .cta-form .two { grid-template-columns:1fr; }
+      .steps-row { grid-template-columns:1fr; }
     }
-    @media (max-width: 560px) {
-      #hero { padding: 48px 0 60px; }
-      section.band { padding: 60px 0; }
-      .steps { grid-template-columns: 1fr; }
-      .input-group { flex-direction: column; }
-      .wl-rows .row2 { grid-template-columns: 1fr; }
-      #waitlist .box { padding: 40px 22px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .js .reveal, .js .reveal.visible { opacity: 1; transform: none; transition: none; }
-      #toast { transition: none; }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      .js .rise, .js .rise.in { opacity:1; transform:none; transition:none; }
+      .js .merge .draw { stroke-dashoffset:0; transition:none; }
+      .js .merge .pop { opacity:1; transform:none; transition:none; }
+      .js .steps-line::after { transform:scaleX(1); transition:none; }
+      .scrollcue i { animation:none; }
+      #toast { transition:none; }
     }
   </style>
 </head>
 <body>
 
-<div id="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo">Coast</a>
-    <a href="#waitlist" class="nav-btn">Join waitlist</a>
-  </div>
-</div>
+<nav id="nav">
+  <a href="#" class="logo">Coast</a>
+  <a href="#cta" class="nav-cta">Join waitlist</a>
+</nav>
 
 <!-- ================= HERO ================= -->
-<section id="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Ride sharing · India</span>
-      <h1 class="hero-title">Someone's already going <em>your way.</em></h1>
-      <p class="hero-sub">
-        Coast shows you who's headed where you're headed — right now, near you.
-        You pick who to ride with and split the fare. No dispatch, no assigned
-        stranger, no meter.
-      </p>
-      <form id="hero-waitlist" class="hero-form" data-waitlist-form>
-        <div class="input-group">
-          <input type="email" id="hero-email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address" />
-          <button type="submit" class="btn">Get early access</button>
-        </div>
-        <p class="form-footnote">Android, launching soon. We'll email you once — no spam.</p>
-      </form>
+<header id="hero">
+  <canvas id="ribbon" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">Ride sharing · India</p>
+    <h1 class="hero-title">Someone's already going <em>your way.</em></h1>
+    <p class="hero-sub">See who's headed where you're headed, right now, near you. Pick who to ride with and split the fare.</p>
+    <form id="hero-form" class="hero-form">
+      <div class="field">
+        <input type="email" id="hero-email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address" />
+        <button type="submit" class="btn">Get early access</button>
+      </div>
+      <p class="hero-foot">Android · launching soon · one email, no spam</p>
+    </form>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><i></i>Scroll</div>
+</header>
+
+<!-- ================= BEAT 1 — the idea ================= -->
+<section class="beat">
+  <div class="wrap">
+    <div class="beat-head rise">
+      <p class="eyebrow">The idea</p>
+      <h2>Two people. One direction.</h2>
+      <p class="beat-lead">You're going somewhere. So is someone nearby. Coast puts you on the same ride.</p>
     </div>
 
-    <div class="panel reveal" aria-hidden="true">
-      <div class="panel-map">
-        <div class="route"></div>
-        <div class="pin a"></div>
-        <div class="pin b"></div>
-      </div>
-      <div class="panel-label"><span>Nearby now</span><span>within 5 km</span></div>
+    <svg class="merge" viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two separate routes merging into one shared route to the same place">
+      <!-- origin paths — dotted, present as context -->
+      <path d="M40 60 C 170 60, 240 120, 360 150" stroke="#B7BAB2" stroke-width="2" stroke-dasharray="4 8" stroke-linecap="round"/>
+      <path d="M40 240 C 170 240, 240 180, 360 150" stroke="#B7BAB2" stroke-width="2" stroke-dasharray="4 8" stroke-linecap="round"/>
+      <!-- merged route — draws itself in -->
+      <path class="draw" style="--len:360" d="M360 150 C 500 150, 590 150, 706 150" stroke="#0F7C7A" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- origin dots -->
+      <circle cx="40" cy="60" r="6.5" fill="#B7BAB2"/>
+      <circle cx="40" cy="240" r="6.5" fill="#B7BAB2"/>
+      <!-- merge point -->
+      <circle class="pop" cx="360" cy="150" r="9" fill="#0F7C7A"/>
+      <!-- destination pin -->
+      <g class="pop" transform="translate(706,150)">
+        <path d="M0 -22 C 13 -22, 19 -11, 0 15 C -19 -11, -13 -22, 0 -22 Z" fill="#0F7C7A"/>
+        <circle cx="0" cy="-13" r="5" fill="#F6F4F1"/>
+      </g>
+    </svg>
+  </div>
+</section>
 
-      <div class="ride">
-        <div class="av">P</div>
-        <div>
-          <div class="who">Priya</div>
-          <div class="meta">HITEC City · leaves 9:15 AM</div>
-        </div>
-        <div class="seats">2 seats</div>
-      </div>
-      <div class="ride">
-        <div class="av">A</div>
-        <div>
-          <div class="who">Aisha <span class="tag-wo">women only</span></div>
-          <div class="meta">Gachibowli · leaves 9:20 AM</div>
-        </div>
-        <div class="seats">3 seats</div>
-      </div>
-      <div class="ride">
-        <div class="av">R</div>
-        <div>
-          <div class="who">Rahul</div>
-          <div class="meta">Ameerpet Metro · leaves 9:30 AM</div>
-        </div>
-        <div class="seats">1 seat</div>
-      </div>
+<!-- ================= BEAT 2 — you choose ================= -->
+<section class="beat" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap beat-2-grid">
+    <div class="rise">
+      <p class="eyebrow">You choose</p>
+      <h2>See who's near. Pick who.</h2>
+      <p class="beat-lead">Nobody is assigned to you. You see who's going your way, with their name and rating, and decide who to ask.</p>
+    </div>
+    <div class="panel rise" aria-hidden="true">
+      <div class="panel-map"><span class="rt"></span><span class="p l"></span><span class="p r"></span></div>
+      <div class="panel-lbl"><span>Nearby now</span><span>within 5 km</span></div>
+      <div class="ride"><span class="av">P</span><span><span class="who">Priya</span><span class="mt">HITEC City · 9:15 AM</span></span><span class="st">2 seats</span></div>
+      <div class="ride"><span class="av">A</span><span><span class="who">Aisha<span class="wo">women only</span></span><span class="mt">Gachibowli · 9:20 AM</span></span><span class="st">3 seats</span></div>
+      <div class="ride"><span class="av">R</span><span><span class="who">Rahul</span><span class="mt">Ameerpet Metro · 9:30 AM</span></span><span class="st">1 seat</span></div>
     </div>
   </div>
 </section>
 
-<!-- ================= WHY COAST ================= -->
-<section class="band">
+<!-- ================= BEAT 3 — how it works ================= -->
+<section class="beat">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">What's different</span>
-      <h2>Find each other, and choose.</h2>
-      <p>
-        Two things make everyday ride coordination worse than it should be: you
-        can't find people going your way, and when an app does match you, it
-        takes the choice away. Coast fixes both.
-      </p>
-    </div>
-
-    <div class="contrasts">
-      <div class="contrast reveal">
-        <div class="k">01 — Control</div>
-        <h3>You choose who</h3>
-        <p>See who's going your way, with their name and rating, and decide who to ask. Nobody is assigned to you.</p>
-        <div class="usual"><b>Usually:</b> a pooled ride puts you in a car with whoever the algorithm picked.</div>
-      </div>
-      <div class="contrast reveal">
-        <div class="k">02 — Privacy</div>
-        <h3>Your location stays fuzzy</h3>
-        <p>Coast never stores where you actually are. Every point is nudged 60–180 m before it's saved — enough to match you, not enough to find your door.</p>
-        <div class="usual"><b>Usually:</b> your exact coordinates sit in someone's database forever.</div>
-      </div>
-      <div class="contrast reveal">
-        <div class="k">03 — Money</div>
-        <h3>No payments through the app</h3>
-        <p>You settle the fare between yourselves — cash, UPI, whatever you agree. Coast doesn't process it and doesn't take a cut of your ride.</p>
-        <div class="usual"><b>Usually:</b> the platform sits in the middle of every rupee and skims it.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HOW IT WORKS ================= -->
-<section class="band" style="background:var(--card);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">How it works</span>
+    <div class="beat-head rise">
+      <p class="eyebrow">How it works</p>
       <h2>Post, match, ride.</h2>
     </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="n">1</div>
-        <h3>Post where you're headed</h3>
-        <p>Destination, time, and how many seats you can share.</p>
-      </div>
-      <div class="step reveal">
-        <div class="n">2</div>
-        <h3>See who's near</h3>
-        <p>People going the same way show up on a live map within 5 km.</p>
-      </div>
-      <div class="step reveal">
-        <div class="n">3</div>
-        <h3>Request — they accept</h3>
-        <p>Phone numbers appear only after you both agree, and only if they chose to share theirs.</p>
-      </div>
-      <div class="step reveal">
-        <div class="n">4</div>
-        <h3>Ride and rate</h3>
-        <p>Meet up, split the fare, rate each other. Bad actors get reported and suspended.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SAFETY ================= -->
-<section id="safety" class="band">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Safety</span>
-      <h2>Built for getting in a car with someone you just met.</h2>
-      <p>Trust is earned with real controls, not a checkmark. Here's what Coast actually gives you.</p>
-    </div>
-    <div class="safety-list">
-      <div class="safety-item reveal">
-        <h3>Match your own gender only</h3>
-        <p>Optional, and it works both ways — you only see, and are only seen by, riders of the same gender.</p>
-      </div>
-      <div class="safety-item reveal">
-        <h3>Block or report anyone</h3>
-        <p>From the rider card or the match screen. Repeat reports against the same account suspend it automatically.</p>
-      </div>
-      <div class="safety-item reveal">
-        <h3>Every ride is rated</h3>
-        <p>Both people rate each other 1–5 after the ride. Ratings are real — there's no fake score to pad a profile.</p>
-      </div>
-      <div class="safety-item reveal">
-        <h3>Share your trip in one tap</h3>
-        <p>Send who you're riding with, where, and when to someone you trust, straight from the app.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WAITLIST ================= -->
-<section id="waitlist" class="band">
-  <div class="wrap">
-    <div class="box reveal">
-      <span class="eyebrow">Early access</span>
-      <h2>Be one of the first to ride.</h2>
-      <p class="lead">Join the waitlist and we'll tell you the moment Coast is on the Play Store.</p>
-      <form id="waitlist-form" class="wl-form" data-waitlist-form>
-        <div class="wl-rows">
-          <div class="row2">
-            <input type="text" id="wl-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
-            <input type="email" id="wl-email" placeholder="Email address" required autocomplete="email" aria-label="Email address" />
-          </div>
-          <input type="tel" id="wl-phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone number, optional" />
-          <button type="submit" class="btn">Join the waitlist</button>
+    <div class="steps rise">
+      <div class="steps-line" aria-hidden="true"></div>
+      <div class="steps-row">
+        <div class="step">
+          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <h3>Post your route</h3>
+          <p>where, when, seats</p>
         </div>
-        <p id="wl-message"></p>
-      </form>
-      <div class="wl-stats">
-        <div class="wl-stat"><span class="num" id="stat-count">—</span><span class="lbl">on the list</span></div>
-        <div class="wl-div"></div>
-        <div class="wl-stat"><span class="num">Android</span><span class="lbl">first</span></div>
-        <div class="wl-div"></div>
-        <div class="wl-stat"><span class="num">Free</span><span class="lbl">to use</span></div>
+        <div class="step">
+          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4M16.2 7.8a6 6 0 0 1 0 8.4M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></div>
+          <h3>See who's near</h3>
+          <p>live, within 5 km</p>
+        </div>
+        <div class="step">
+          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 7"/></svg></div>
+          <h3>Both say yes</h3>
+          <p>then numbers show</p>
+        </div>
+        <div class="step">
+          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19l1-5.8-4.3-4.1 5.9-.9L12 3Z"/></svg></div>
+          <h3>Ride &amp; rate</h3>
+          <p>split it, rate them</p>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEAT 4 — yours stays yours ================= -->
+<section id="privacy" class="beat">
+  <div class="wrap">
+    <div class="beat-head rise">
+      <p class="eyebrow">Yours stays yours</p>
+      <h2>Built for getting in a car with a stranger.</h2>
+      <p class="beat-lead">The parts that matter aren't a promise in the copy — they're how the app is built.</p>
+    </div>
+    <div class="tiles rise">
+      <div class="tile">
+        <div class="fig">
+          <div class="fuzz-pin"><span class="ring"></span><span class="dot"></span><span class="m">60–180 m off</span></div>
+        </div>
+        <h3>Location stays fuzzy</h3>
+        <p>Every point is nudged 60–180 m before it's stored. Your exact position is never saved.</p>
+      </div>
+      <div class="tile">
+        <div class="fig">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#6FBFBC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4" fill="#6FBFBC"/></svg>
+        </div>
+        <h3>Number is gated</h3>
+        <p>Phone numbers appear only after you both agree — and only if they chose to share.</p>
+      </div>
+      <div class="tile">
+        <div class="fig">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#6FBFBC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 8.5h4.2a2.3 2.3 0 0 1 0 4.6H10M9 13h3M9 16l5-8"/></svg>
+        </div>
+        <h3>No money in the app</h3>
+        <p>Settle the fare between yourselves — cash, UPI, whatever. Coast takes no cut.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="cta">
+  <div class="wrap box">
+    <p class="eyebrow">Early access</p>
+    <h2>Be one of the first to ride.</h2>
+    <p class="lead">Join the waitlist — we'll tell you the moment Coast is on the Play Store.</p>
+    <form id="cta-form" class="cta-form">
+      <div class="two">
+        <input type="text" id="wl-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
+        <input type="email" id="wl-email" placeholder="Email address" required autocomplete="email" aria-label="Email address" />
+      </div>
+      <input type="tel" id="wl-phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone, optional" />
+      <button type="submit" class="btn">Join the waitlist</button>
+      <p id="wl-message"></p>
+    </form>
+    <div class="cta-stats">
+      <span><span class="n" id="stat-count">—</span><span class="l">on the list</span></span>
+      <i></i>
+      <span><span class="n">Android</span><span class="l">first</span></span>
+      <i></i>
+      <span><span class="n">Free</span><span class="l">to use</span></span>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot-inner">
-    <div class="c">© 2026 Coast</div>
-    <nav class="foot-links">
+  <div class="wrap foot">
+    <a href="#" class="logo">Coast</a>
+    <nav>
       <a href="privacy-policy.html">Privacy</a>
       <a href="terms-of-service.html">Terms</a>
       <a href="delete-account.html">Delete account</a>
@@ -606,98 +457,224 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
+<!-- Pinned + Subresource-Integrity checked: a hijacked CDN response can't
+     execute. Hash is for three@0.160.0 exactly — regenerate if the version
+     changes. If it ever fails to load, the hero degrades to its ink gradient. -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"
+        integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/config.js"></script>
 <script>
 (function () {
-  var cfg = window.COAST_CONFIG || {};
-  var URL_ = cfg.SUPABASE_URL, KEY = cfg.SUPABASE_ANON_KEY;
-
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var nav = document.getElementById('nav');
-  var toast = document.getElementById('toast');
-  var toastT;
-  function showToast(msg, type) {
-    toast.textContent = msg;
-    toast.className = type || '';
+  var hero = document.getElementById('hero');
+
+  /* ---- nav state ---- */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) {
+      nav.classList.toggle('past-hero', !e[0].isIntersecting);
+    }, { rootMargin: '-70% 0px 0px 0px' }).observe(hero);
+
+    var rev = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.rise, .merge, .steps').forEach(function (el) { rev.observe(el); });
+  } else {
+    document.querySelectorAll('.rise, .merge, .steps').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---- 3D flowing route ribbon ---- */
+  (function ribbon() {
+    var cv = document.getElementById('ribbon');
+    if (!cv || typeof THREE === 'undefined') return;
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
+    } catch (e) { return; }
+
+    var W = hero.clientWidth, H = hero.clientHeight;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W, H, false);
+
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0e0f13, 0.085);
+    var camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+    camera.position.set(0, 0.35, 6.2);
+    camera.lookAt(0, 0.1, 0);
+
+    var group = new THREE.Group();
+    scene.add(group);
+
+    // A calm S-curve receding into depth — "the route".
+    function makeCurve(offset) {
+      return new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-6.4, -1.5 + offset, 3.2),
+        new THREE.Vector3(-3.4, -0.7 + offset, 1.4),
+        new THREE.Vector3(-1.0, 0.15 + offset, 0.2),
+        new THREE.Vector3(1.4, -0.35 + offset, -1.4),
+        new THREE.Vector3(3.6, 0.55 + offset, -3.2),
+        new THREE.Vector3(6.6, 1.5 + offset, -5.6)
+      ], false, 'catmullrom', 0.4);
+    }
+
+    // Moving-highlight texture: soft teal base + a brighter band that flows.
+    function flowTexture() {
+      var c = document.createElement('canvas');
+      c.width = 256; c.height = 4;
+      var g = c.getContext('2d').createLinearGradient(0, 0, 256, 0);
+      g.addColorStop(0.00, 'rgba(15,124,122,0.30)');
+      g.addColorStop(0.40, 'rgba(15,124,122,0.30)');
+      g.addColorStop(0.50, 'rgba(120,235,231,0.95)');
+      g.addColorStop(0.60, 'rgba(15,124,122,0.30)');
+      g.addColorStop(1.00, 'rgba(15,124,122,0.30)');
+      var ctx = c.getContext('2d');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, 256, 4);
+      var t = new THREE.CanvasTexture(c);
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+      t.repeat.set(5, 1);
+      return t;
+    }
+
+    var ribbons = [];
+    var specs = [
+      { offset: 0.0, radius: 0.05, opacity: 0.95, speed: 0.0016, phase: 0 },
+      { offset: 0.5, radius: 0.028, opacity: 0.4, speed: 0.0011, phase: 0.4 },
+      { offset: -0.45, radius: 0.028, opacity: 0.4, speed: 0.0020, phase: 0.8 }
+    ];
+    specs.forEach(function (s) {
+      var geo = new THREE.TubeGeometry(makeCurve(s.offset), 240, s.radius, 10, false);
+      var tex = flowTexture();
+      tex.offset.x = s.phase;
+      var mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: s.opacity, depthWrite: false });
+      var mesh = new THREE.Mesh(geo, mat);
+      group.add(mesh);
+      ribbons.push({ mesh: mesh, tex: tex, speed: s.speed });
+    });
+
+    // sparse waypoint glows riding the main curve
+    var mainCurve = makeCurve(0);
+    var wp = [];
+    for (var i = 0; i < 10; i++) {
+      var m = new THREE.Mesh(
+        new THREE.SphereGeometry(0.04, 12, 12),
+        new THREE.MeshBasicMaterial({ color: 0x78ebe7, transparent: true, opacity: 0.9 })
+      );
+      group.add(m);
+      wp.push({ mesh: m, t: i / 10, spd: 0.00035 + Math.random() * 0.0004 });
+    }
+
+    var mx = 0, my = 0, tgx = 0, tgy = 0;
+    if (!reduce) {
+      window.addEventListener('pointermove', function (e) {
+        tgx = (e.clientX / window.innerWidth - 0.5);
+        tgy = (e.clientY / window.innerHeight - 0.5);
+      }, { passive: true });
+    }
+
+    function resize() {
+      W = hero.clientWidth; H = hero.clientHeight;
+      camera.aspect = W / H; camera.updateProjectionMatrix();
+      renderer.setSize(W, H, false);
+    }
+    window.addEventListener('resize', resize);
+
+    var running = true, clockT = 0;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { running = e[0].isIntersecting; if (running && !reduce) loop(); })
+        .observe(hero);
+    }
+    document.addEventListener('visibilitychange', function () {
+      running = !document.hidden;
+      if (running && !reduce) loop();
+    });
+
+    function frame() {
+      clockT += 1;
+      mx += (tgx - mx) * 0.04; my += (tgy - my) * 0.04;
+      group.rotation.y = mx * 0.18;
+      group.rotation.x = my * 0.12 + Math.sin(clockT * 0.003) * 0.02;
+      group.position.y = Math.sin(clockT * 0.004) * 0.05;
+      ribbons.forEach(function (r) { r.tex.offset.x -= r.speed; });
+      wp.forEach(function (w) {
+        w.t += w.spd; if (w.t > 1) w.t -= 1;
+        var p = mainCurve.getPointAt(w.t);
+        w.mesh.position.set(p.x, p.y, p.z);
+        w.mesh.material.opacity = 0.35 + 0.55 * Math.sin(w.t * Math.PI);
+      });
+      renderer.render(scene, camera);
+    }
+
+    var rafId = 0;
+    function loop() { cancelAnimationFrame(rafId); if (!running) return; frame(); rafId = requestAnimationFrame(loop); }
+
+    frame();                 // paint one frame always
+    if (!reduce) loop();     // animate only if motion is allowed
+  })();
+
+  /* ---- waitlist ---- */
+  var cfg = window.COAST_CONFIG || {};
+  var U = cfg.SUPABASE_URL, K = cfg.SUPABASE_ANON_KEY;
+  var toast = document.getElementById('toast'), toastT;
+  function showToast(m, t) {
+    toast.textContent = m; toast.className = t || '';
     clearTimeout(toastT);
     requestAnimationFrame(function () { toast.classList.add('show'); });
     toastT = setTimeout(function () { toast.classList.remove('show'); }, 4000);
   }
-
-  // Scroll reveal
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-  } else {
-    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
-  }
-
-  window.addEventListener('scroll', function () {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  // Waitlist — degrades gracefully if site config is absent (e.g. preview)
-  var heroForm = document.getElementById('hero-waitlist');
-  var wlForm = document.getElementById('waitlist-form');
-  var wlMessage = document.getElementById('wl-message');
+  var heroForm = document.getElementById('hero-form');
+  var ctaForm = document.getElementById('cta-form');
+  var wlMsg = document.getElementById('wl-message');
   var statCount = document.getElementById('stat-count');
   var count = null;
 
-  if (!URL_ || !KEY) {
-    if (wlMessage) wlMessage.textContent = 'Waitlist is warming up — check back shortly.';
-  } else {
-    fetch(URL_ + '/rest/v1/rpc/get_waitlist_count', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
-      body: '{}',
-    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
-      var n = typeof v === 'number' ? v : parseInt(v, 10);
-      if (statCount && Number.isFinite(n)) { count = n; statCount.textContent = n; }
-    }).catch(function () {});
-
-    var submit = function (data) {
-      return fetch(URL_ + '/rest/v1/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': KEY,
-          'Authorization': 'Bearer ' + KEY,
-          'Prefer': 'resolution=merge-duplicates,return=minimal',
-        },
-        body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null }),
-      }).then(function (res) {
-        if (res.ok) {
-          count = (count == null ? 0 : count) + 1;
-          if (statCount) statCount.textContent = count;
-          showToast("You're on the list. We'll email you at launch.");
-        } else {
-          showToast('Something went wrong. Try again?', 'error');
-        }
-      }).catch(function () {
-        showToast('Network error — check your connection and try again.', 'error');
-      });
-    };
-
-    heroForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('hero-email').value.trim();
-      if (!email) return;
-      submit({ email: email }).then(function () { heroForm.reset(); });
-    });
-
-    wlForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('wl-email').value.trim();
-      if (!email) return;
-      wlMessage.textContent = 'Joining…';
-      submit({
-        name: document.getElementById('wl-name').value.trim(),
-        email: email,
-        phone: document.getElementById('wl-phone').value.trim(),
-      }).then(function () { wlForm.reset(); wlMessage.textContent = ''; });
-    });
+  if (!U || !K) {
+    if (wlMsg) wlMsg.textContent = 'Waitlist is warming up — check back shortly.';
+    return;
   }
+  fetch(U + '/rest/v1/rpc/get_waitlist_count', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K },
+    body: '{}'
+  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+    var n = typeof v === 'number' ? v : parseInt(v, 10);
+    if (statCount && Number.isFinite(n)) { count = n; statCount.textContent = n; }
+  }).catch(function () {});
+
+  function submit(data) {
+    return fetch(U + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K,
+        Prefer: 'resolution=merge-duplicates,return=minimal'
+      },
+      body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null })
+    }).then(function (res) {
+      if (res.ok) {
+        count = (count == null ? 0 : count) + 1;
+        if (statCount) statCount.textContent = count;
+        showToast("You're on the list. We'll email you at launch.");
+      } else { showToast('Something went wrong. Try again?', 'error'); }
+    }).catch(function () { showToast('Network error — check your connection.', 'error'); });
+  }
+  heroForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('hero-email').value.trim();
+    if (email) submit({ email: email }).then(function () { heroForm.reset(); });
+  });
+  ctaForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('wl-email').value.trim();
+    if (!email) return;
+    wlMsg.textContent = 'Joining…';
+    submit({
+      name: document.getElementById('wl-name').value.trim(),
+      email: email,
+      phone: document.getElementById('wl-phone').value.trim()
+    }).then(function () { ctaForm.reset(); wlMsg.textContent = ''; });
+  });
 })();
 </script>
 </body>
