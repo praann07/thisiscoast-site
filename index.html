@@ -237,6 +237,11 @@
     .foot nav { display:flex; flex-wrap:wrap; gap:20px; }
     .foot a { font-size:13.5px; color:rgba(255,255,255,.72); text-decoration:none; }
     .foot a:hover { color:#fff; }
+    .foot-by { display:flex; flex-wrap:wrap; gap:6px 22px; justify-content:space-between;
+      margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.1);
+      font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.04em; color:rgba(255,255,255,.42); }
+    .foot-by a { color:rgba(255,255,255,.72); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.25); }
+    .foot-by a:hover { color:#fff; border-color:var(--teal-lift); }
 
     /* ---------- SCREENSHOTS ---------- */
     .shots { background:var(--ink); color:#E9EAEC; padding:clamp(72px,7vw,120px) 0; }
@@ -546,6 +551,10 @@
       <a href="delete-account.html">Delete account</a>
       <a href="mailto:support@coastnow.in">support@coastnow.in</a>
     </nav>
+  </div>
+  <div class="wrap foot-by">
+    <span>&copy; 2026 Coast</span>
+    <span>Built by <a href="https://github.com/praann07" target="_blank" rel="noopener">Praneeth</a></span>
   </div>
 </footer>
 
