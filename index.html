@@ -146,8 +146,6 @@
 
     /* ---------- STORY BEATS (paper) ---------- */
     .beat { padding:clamp(84px,7vw,140px) 0; position:relative; }
-    .beat.beat-tight { padding:clamp(60px,5vw,96px) 0; }
-    .beat-tight .beat-head { margin-bottom:0; }
     .beat-head { max-width:36rem; margin-bottom:52px; }
     .beat-head h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
     .beat-lead { margin:16px 0 0; color:var(--text-2); font-size:1.06rem; max-width:34rem; }
@@ -177,36 +175,6 @@
     @keyframes idea-sig   { 0%,100% { opacity:.15; } 50% { opacity:1; } }
     @keyframes idea-phone { 0%,100% { opacity:.72; } 50% { opacity:1; } }
 
-    /* Beat 2 — app panel */
-    .beat-2-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
-    .panel {
-      background:var(--ink); border-radius:26px; padding:14px;
-      box-shadow:0 40px 90px -30px rgba(14,15,19,.45); max-width:420px;
-    }
-    .panel-map { position:relative; height:150px; border-radius:16px; overflow:hidden;
-      background:radial-gradient(120% 120% at 20% 15%,#23303a,#182028 55%,#12181e); }
-    .panel-map::before { content:""; position:absolute; inset:0;
-      background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
-      background-size:26px 26px; }
-    .panel-map .rt { position:absolute; left:14%; right:20%; top:56%; height:3px; border-radius:3px;
-      background:linear-gradient(90deg,transparent,var(--teal) 28%,var(--teal-lift) 72%,transparent); }
-    .panel-map .p { position:absolute; width:11px; height:11px; border-radius:50%; background:var(--teal-lift);
-      box-shadow:0 0 0 5px rgba(47,185,181,.22); top:52%; }
-    .panel-map .p.l { left:13%; } .panel-map .p.r { right:19%; background:#fff; box-shadow:0 0 0 5px rgba(255,255,255,.16); }
-    .panel-lbl { display:flex; justify-content:space-between; padding:15px 8px 8px;
-      font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:#8B9096; }
-    .ride { display:grid; grid-template-columns:32px 1fr auto; gap:11px; align-items:center;
-      background:var(--ink-2); border:1px solid var(--ink-line); border-radius:13px; padding:11px; margin-top:7px; }
-    .ride .av { width:32px; height:32px; border-radius:50%; display:grid; place-items:center;
-      font-family:"Instrument Serif",serif; font-size:14px; color:#fff; background:#2E3A44; }
-    .ride > span { min-width:0; }
-    .ride .who { display:block; color:#EDEEF0; font-size:13.5px; font-weight:500; }
-    .ride .mt { display:block; color:#8A8D95; font-size:11.5px; margin-top:2px; }
-    .ride .st { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--teal-lift);
-      border:1px solid rgba(47,185,181,.4); border-radius:999px; padding:3px 8px; white-space:nowrap; }
-    .ride .wo { font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
-      color:#E6B8AE; border:1px solid rgba(216,67,43,.4); border-radius:999px; padding:2px 6px; margin-left:6px; }
-
     /* Beat 3 — route of steps */
     .steps { position:relative; }
     .steps-line { position:absolute; left:0; right:0; top:28px; height:2px;
@@ -214,7 +182,7 @@
     .js .steps-line::after { content:""; position:absolute; inset:0; background:var(--teal);
       transform:scaleX(0); transform-origin:left; transition:transform 1.6s var(--ease); }
     .js .steps.in .steps-line::after { transform:scaleX(1); }
-    .steps-row { position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+    .steps-row { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
     .step { text-align:left; }
     .step .node {
       width:56px; height:56px; border-radius:50%; background:var(--card);
@@ -275,9 +243,7 @@
     .shots .eyebrow { color:#6FBFBC; }
     .shots-grid { display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:center; }
     .shots h2 { font-size:clamp(1.9rem,1.4rem+2vw,2.9rem); margin-top:12px; color:#fff; }
-    .shots-list { list-style:none; margin:22px 0 0; padding:0; display:grid; gap:12px; }
-    .shots-list li { position:relative; padding-left:24px; color:#B9BDC2; font-size:1rem; }
-    .shots-list li::before { content:""; position:absolute; left:0; top:.62em; width:10px; height:2px; background:var(--teal-lift); border-radius:2px; }
+    .shots-lead { margin:20px 0 0; color:#B9BDC2; font-size:1.06rem; line-height:1.6; max-width:34rem; }
     .phone { display:flex; justify-content:center; }
     .phone-frame {
       position:relative; width:250px; aspect-ratio:9 / 19.2; border-radius:34px;
@@ -326,8 +292,6 @@
     }
     #nav.past-hero::before { opacity:1; }
     a.scrollcue { text-decoration:none; }
-    .ride { transition:transform .18s var(--ease), border-color .18s var(--ease); }
-    .panel.in .ride:hover { transform:translateY(-1px); border-color:#3a4450; }
 
     /* ---------- STAGGERED REVEALS ---------- */
     .js .tiles.rise .tile { opacity:0; transform:translateY(16px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
@@ -338,30 +302,12 @@
 
     .js .steps .step { opacity:0; transform:translateY(14px); transition:opacity .5s var(--ease), transform .5s var(--ease); }
     .js .steps.in .step { opacity:1; transform:none; }
-    .js .steps.in .step:nth-child(1){ transition-delay:.15s; }
-    .js .steps.in .step:nth-child(2){ transition-delay:.55s; }
-    .js .steps.in .step:nth-child(3){ transition-delay:.95s; }
-    .js .steps.in .step:nth-child(4){ transition-delay:1.35s; }
-
-    .js .panel .rt { transform:scaleX(0); transform-origin:left; transition:transform .8s var(--ease) .35s; }
-    .js .panel.in .rt { transform:scaleX(1); }
-    .js .panel .p.l { opacity:0; transform:translateX(-22px); transition:opacity .55s var(--ease) .15s, transform .55s var(--ease) .15s; }
-    .js .panel .p.r { opacity:0; transform:translateX(22px);  transition:opacity .55s var(--ease) .15s, transform .55s var(--ease) .15s; }
-    .js .panel.in .p.l, .js .panel.in .p.r { opacity:1; transform:none; }
-    .js .panel .ride { opacity:0; transform:translateY(12px); transition:opacity .5s var(--ease), transform .5s var(--ease); }
-    .js .panel.in .ride { opacity:1; transform:none; }
-    .js .panel.in .ride:nth-child(3){ transition-delay:.5s; }
-    .js .panel.in .ride:nth-child(4){ transition-delay:.6s; }
-    .js .panel.in .ride:nth-child(5){ transition-delay:.7s; }
+    .js .steps.in .step:nth-child(1){ transition-delay:.12s; }
+    .js .steps.in .step:nth-child(2){ transition-delay:.6s; }
+    .js .steps.in .step:nth-child(3){ transition-delay:1.1s; }
 
     .js .phone { opacity:0; transform:translateY(26px) rotate(2deg); transition:opacity .8s var(--ease), transform .8s var(--ease); }
     .js .phone.in { opacity:1; transform:none; }
-    .js .shots-copy .shots-list li { opacity:0; transform:translateY(10px); transition:opacity .5s var(--ease), transform .5s var(--ease); }
-    .js .shots-copy.in .shots-list li { opacity:1; transform:none; }
-    .js .shots-copy.in .shots-list li:nth-child(1){ transition-delay:.10s; }
-    .js .shots-copy.in .shots-list li:nth-child(2){ transition-delay:.18s; }
-    .js .shots-copy.in .shots-list li:nth-child(3){ transition-delay:.26s; }
-    .js .shots-copy.in .shots-list li:nth-child(4){ transition-delay:.34s; }
 
     /* reveal */
     .js .rise { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
@@ -375,15 +321,12 @@
     #toast.error { background:#D8432B; }
 
     @media (max-width:860px) {
-      .beat-2-grid, .idea-grid { grid-template-columns:1fr; gap:40px; }
-      .scene { order:-1; }
-      .panel { margin:0 auto; }
-      .steps-row { grid-template-columns:1fr 1fr; gap:32px 24px; }
+      .idea-grid, .shots-grid { grid-template-columns:1fr; gap:40px; }
+      .scene, .phone { order:-1; }
+      .steps-row { grid-template-columns:1fr; gap:28px; }
       .steps-line { display:none; }
       .js .steps.in .step:nth-child(n){ transition-delay:.1s; }
       .tiles { grid-template-columns:1fr; }
-      .shots-grid { grid-template-columns:1fr; gap:38px; }
-      .phone { order:-1; }
       .phone-frame::after { display:none; }
     }
     @media (max-width:520px) {
@@ -405,9 +348,7 @@
       #toast { transition:none; }
       .js #hero .eyebrow, .js .hero-title, .js .hero-sub, .js .hero-form,
       .js .scrollcue, .js #ribbon { animation:none !important; opacity:1 !important; transform:none !important; }
-      .js .tiles.rise .tile, .js .steps .step, .js .panel .rt,
-      .js .panel .p.l, .js .panel .p.r, .js .panel .ride,
-      .js .phone, .js .shots-copy .shots-list li {
+      .js .tiles.rise .tile, .js .steps .step, .js .phone {
         opacity:1 !important; transform:none !important; transition:none !important;
       }
       .js .fuzz-pin .ring, .js .fuzz-pin .dot { animation:none !important; }
@@ -439,35 +380,6 @@
   </div>
   <a href="#idea" class="scrollcue" aria-label="Skip to content"><i></i>Scroll</a>
 </header>
-
-<!-- ================= SCREENSHOTS (phone frame beside copy) ================= -->
-<section class="shots">
-  <div class="wrap shots-grid">
-    <div class="shots-copy rise">
-      <p class="eyebrow">The app</p>
-      <h2>Real matches, near you.</h2>
-      <ul class="shots-list">
-        <li>See who's going your way, right now</li>
-        <li>Request to share in one tap</li>
-        <li>Numbers show only after you both say yes</li>
-        <li>Rate each other after the ride</li>
-      </ul>
-    </div>
-    <div class="phone rise" aria-hidden="true">
-      <div class="phone-frame">
-        <span class="phone-pill"></span>
-        <div class="phone-screen">
-          <!-- To use a real screenshot, replace this <div class="shot">…</div> with:
-               <img src="shots/map.png" alt="Coast — nearby trips on the map" loading="lazy"> -->
-          <div class="shot">
-            <span class="shot-word">Coast</span>
-            <span class="shot-tag">Screenshot</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ================= BEAT 1 — the idea ================= -->
 <section class="beat" id="idea">
@@ -512,13 +424,26 @@
   </div>
 </section>
 
-<!-- ================= BEAT 2 — you choose ================= -->
-<section class="beat beat-tight" style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="beat-head rise">
-      <p class="eyebrow">You choose</p>
-      <h2>See who's near. Pick who.</h2>
-      <p class="beat-lead">Nobody is assigned to you. You see who's going your way &mdash; their name, their rating, where they're headed &mdash; and decide who to ask. That's the whole difference.</p>
+<!-- ================= WHY COAST — you choose, with the app ================= -->
+<section class="shots">
+  <div class="wrap shots-grid">
+    <div class="shots-copy rise">
+      <p class="eyebrow">Why Coast</p>
+      <h2>You pick who. Not an algorithm.</h2>
+      <p class="shots-lead">Pooled rides assign you a stranger, sight unseen. On Coast you see them first &mdash; name, rating, route &mdash; and it&rsquo;s your call.</p>
+    </div>
+    <div class="phone rise" aria-hidden="true">
+      <div class="phone-frame">
+        <span class="phone-pill"></span>
+        <div class="phone-screen">
+          <!-- Real screenshot: replace this <div class="shot">…</div> with
+               <img src="shots/map.png" alt="Coast — nearby riders on the map" loading="lazy"> -->
+          <div class="shot">
+            <span class="shot-word">Coast</span>
+            <span class="shot-tag">Screenshot</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -530,28 +455,23 @@
       <p class="eyebrow">How it works</p>
       <h2>Post, match, ride.</h2>
     </div>
-    <div class="steps rise">
+    <div class="steps steps-3 rise">
       <div class="steps-line" aria-hidden="true"></div>
       <div class="steps-row">
         <div class="step">
           <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-          <h3>Post your route</h3>
-          <p>where, when, seats</p>
+          <h3>Post your trip</h3>
+          <p>destination, time, seats</p>
         </div>
         <div class="step">
           <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4M16.2 7.8a6 6 0 0 1 0 8.4M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></div>
-          <h3>See who's near</h3>
-          <p>live, within 5 km</p>
-        </div>
-        <div class="step">
-          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 7"/></svg></div>
-          <h3>Both say yes</h3>
-          <p>then numbers show</p>
+          <h3>Match with someone close</h3>
+          <p>they ask you, or you ask them</p>
         </div>
         <div class="step">
           <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19l1-5.8-4.3-4.1 5.9-.9L12 3Z"/></svg></div>
-          <h3>Ride &amp; rate</h3>
-          <p>split it, rate them</p>
+          <h3>Ride together</h3>
+          <p>meet at the pin, rate each other after</p>
         </div>
       </div>
     </div>
