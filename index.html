@@ -883,11 +883,13 @@
   }).catch(function () {});
 
   function submit(data) {
+    // Plain INSERT (no upsert) — an upsert would need the anon role to also
+    // hold SELECT+UPDATE on the table, which would expose everyone's email.
     return fetch(U + '/rest/v1/waitlist', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K,
-        Prefer: 'resolution=merge-duplicates,return=minimal'
+        Prefer: 'return=minimal'
       },
       body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null })
     }).then(function (res) {
@@ -895,6 +897,8 @@
         count = (count == null ? 0 : count) + 1;
         if (statCount) statCount.textContent = count;
         showToast("You're on the list. We'll email you at launch.");
+      } else if (res.status === 409) {
+        showToast("You're already on the list — see you at launch.");
       } else { showToast('Something went wrong. Try again?', 'error'); }
     }).catch(function () { showToast('Network error — check your connection.', 'error'); });
   }
