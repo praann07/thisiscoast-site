@@ -298,6 +298,18 @@
     #nav.past-hero::before { opacity:1; }
     a.scrollcue { text-decoration:none; }
 
+    /* ---------- HEADLINE WIPE-REVEAL ---------- */
+    .js .rise h2 { clip-path:inset(0 0 108% 0); transform:translateY(.3em); }
+    .js .rise.in h2 { clip-path:inset(-30% 0 -30% 0); transform:none;
+      transition:clip-path .95s var(--ease) .06s, transform .95s var(--ease) .06s; }
+
+    /* ---------- PHONE — idle float + cursor tilt (JS adds the tilt) ---------- */
+    .phone-frame { transition:transform .3s var(--ease); will-change:transform; }
+    @media (prefers-reduced-motion:no-preference) {
+      .js .phone.in .phone-frame { animation:phoneFloat 7s ease-in-out infinite; }
+    }
+    @keyframes phoneFloat { 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-9px) rotate(-.5deg); } }
+
     /* ---------- STAGGERED REVEALS ---------- */
     .js .tiles.rise .tile { opacity:0; transform:translateY(16px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
     .js .tiles.rise.in .tile { opacity:1; transform:none; }
@@ -356,6 +368,8 @@
       .js .tiles.rise .tile, .js .steps .step, .js .phone {
         opacity:1 !important; transform:none !important; transition:none !important;
       }
+      .js .rise h2, .js .rise.in h2 { clip-path:none !important; transform:none !important; transition:none !important; }
+      .js .phone.in .phone-frame { animation:none !important; }
       .js .fuzz-pin .ring, .js .fuzz-pin .dot { animation:none !important; }
       .shot-tag::after { animation:none !important; }
     }
@@ -587,6 +601,46 @@
     document.querySelectorAll('.rise, .scene, .steps').forEach(function (el) { rev.observe(el); });
   } else {
     document.querySelectorAll('.rise, .scene, .steps').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---- phone: tilt toward the cursor (desktop pointers only) ---- */
+  (function () {
+    var pf = document.querySelector('.phone-frame');
+    if (!pf || reduce || !window.matchMedia('(pointer:fine)').matches) return;
+    pf.addEventListener('pointermove', function (e) {
+      var r = pf.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      pf.style.animationPlayState = 'paused';
+      pf.style.transform = 'perspective(900px) rotateY(' + (x * 11).toFixed(2) + 'deg) rotateX(' + (-y * 11).toFixed(2) + 'deg) translateY(-4px)';
+    });
+    pf.addEventListener('pointerleave', function () {
+      pf.style.transform = '';
+      pf.style.animationPlayState = '';
+    });
+  })();
+
+  /* ---- waitlist count: tween 0 -> real number when the stats scroll in ---- */
+  var statsEl = document.querySelector('.cta-stats');
+  var waitCount = null, statsSeen = false;
+  function tweenCount(el, target) {
+    if (reduce || !target) { el.textContent = target || 0; return; }
+    var t0 = performance.now();
+    (function step(now) {
+      var p = Math.min((now - t0) / 1100, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  function maybeTween() {
+    var el = document.getElementById('stat-count');
+    if (statsSeen && typeof waitCount === 'number' && waitCount > 0 && el) tweenCount(el, waitCount);
+  }
+  if (statsEl && 'IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (e) {
+      if (e[0].isIntersecting) { statsSeen = true; so.disconnect(); maybeTween(); }
+    }, { threshold: 0.5 });
+    so.observe(statsEl);
   }
 
   /* ---- hero animation: two travellers converge onto a shared route ----
@@ -822,7 +876,10 @@
     body: '{}'
   }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
     var n = typeof v === 'number' ? v : parseInt(v, 10);
-    if (statCount && Number.isFinite(n)) { count = n; statCount.textContent = n; }
+    if (!Number.isFinite(n) || !statCount) return;
+    count = n; waitCount = n;
+    if (statsSeen) maybeTween();          // already scrolled past — tween now
+    else statCount.textContent = '0';     // hold at 0 until the stats scroll into view
   }).catch(function () {});
 
   function submit(data) {
