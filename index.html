@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coast — Share the ride with someone already going your way</title>
+  <meta name="description" content="Coast shows you who's heading where you're heading, right now, near you. You choose who to ride with and split the fare. No dispatch, no assigned stranger, no payments through the app. Android, India." />
+  <meta name="keywords" content="ride sharing, carpool, share ride, split fare, proximity matching, commute, India, privacy" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Coast" />
+  <link rel="canonical" href="https://coastnow.in/" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coastnow.in/" />
+  <meta property="og:title" content="Coast — Share the ride with someone already going your way" />
+  <meta property="og:description" content="See who's headed your way, pick who to ride with, split the fare. Privacy-first. Android, India." />
+  <meta property="og:image" content="https://coastnow.in/og-image.png" />
+  <meta property="og:site_name" content="Coast" />
+  <meta property="og:locale" content="en_IN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coast — Share the ride with someone already going your way" />
+  <meta name="twitter:description" content="See who's headed your way, pick who to ride with, split the fare. Privacy-first." />
+  <meta name="twitter:image" content="https://coastnow.in/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    :root {
+      --paper: #F6F4F1;
+      --card: #FFFFFF;
+      --ink: #0E0F13;
+      --ink-surface: #1B1D24;
+      --ink-border: #2A2D37;
+      --teal: #0F7C7A;
+      --teal-deep: #0A5F5D;
+      --teal-tint: #E4EFEE;
+      --text: #1A1B1E;
+      --text-2: #56585F;
+      --text-3: #8A8D95;
+      --hair: #E6E2DC;
+      --success: #1E9E5B;
+      --danger: #D8432B;
+      --shadow-card: 0 1px 2px rgba(14,15,19,.04), 0 10px 30px -12px rgba(14,15,19,.12);
+      --maxw: 1140px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    h1, h2, h3 {
+      font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      letter-spacing: .01em;
+      line-height: 1.08;
+      text-wrap: balance;
+      margin: 0;
+    }
+
+    .eyebrow {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+    }
+
+    a { color: inherit; }
+
+    /* ---------- Nav ---------- */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    #nav.scrolled { border-bottom-color: var(--hair); }
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-style: italic;
+      font-size: 26px;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: .02em;
+    }
+    .nav-btn {
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      background: var(--teal);
+      padding: 9px 18px;
+      border-radius: 999px;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .nav-btn:hover { background: var(--teal-deep); transform: translateY(-1px); }
+
+    /* ---------- Hero ---------- */
+    #hero { padding: 72px 0 88px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.3rem);
+      margin: 18px 0 0;
+    }
+    .hero-title em { font-style: italic; color: var(--teal-deep); }
+    .hero-sub {
+      margin: 22px 0 0;
+      font-size: 1.075rem;
+      color: var(--text-2);
+      max-width: 30rem;
+    }
+    .hero-form { margin-top: 30px; max-width: 30rem; }
+    .input-group {
+      display: flex;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--hair);
+      border-radius: 14px;
+      padding: 6px;
+      box-shadow: var(--shadow-card);
+    }
+    .input-group input {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 12px 14px;
+      font: inherit;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      min-width: 0;
+    }
+    .btn {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+      background: var(--teal);
+      border-radius: 10px;
+      padding: 12px 20px;
+      white-space: nowrap;
+      transition: background .15s ease;
+    }
+    .btn:hover { background: var(--teal-deep); }
+    .form-footnote { margin: 12px 2px 0; font-size: 13px; color: var(--text-3); }
+
+    /* ---------- App panel mock (the signature) ---------- */
+    .panel {
+      background: var(--ink);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: 0 30px 70px -24px rgba(14,15,19,.4);
+    }
+    .panel-map {
+      position: relative;
+      height: 168px;
+      border-radius: 16px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 120% at 20% 15%, #23303a 0%, #182028 55%, #12181e 100%);
+    }
+    .panel-map::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .route {
+      position: absolute;
+      left: 16%; right: 22%; top: 58%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--teal) 30%, var(--teal) 70%, transparent);
+      border-radius: 3px;
+    }
+    .pin {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--teal) 28%, transparent);
+    }
+    .pin.a { left: 15%; top: 54%; }
+    .pin.b { right: 21%; top: 54%; background: #fff; box-shadow: 0 0 0 5px rgba(255,255,255,.18); }
+    .panel-label {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 8px 10px;
+    }
+    .panel-label span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: #7C808C;
+    }
+    .ride {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      background: var(--ink-surface);
+      border: 1px solid var(--ink-border);
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 8px;
+    }
+    .ride .av {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: "Instrument Serif", serif;
+      font-size: 15px; color: #fff;
+      background: #2E3A44;
+    }
+    .ride .who { color: #EDEEF0; font-size: 14px; font-weight: 500; }
+    .ride .meta { color: #8A8D95; font-size: 12px; margin-top: 1px; }
+    .ride .seats {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; color: var(--teal);
+      border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
+      border-radius: 999px; padding: 3px 8px;
+    }
+    .ride .tag-wo {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      color: #E6B8AE;
+      border: 1px solid rgba(216,67,43,.4);
+      border-radius: 999px; padding: 2px 7px;
+    }
+
+    /* ---------- Sections ---------- */
+    section.band { padding: 84px 0; }
+    .section-head { max-width: 34rem; margin-bottom: 44px; }
+    .section-head h2 { font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); margin-top: 10px; }
+    .section-head p { color: var(--text-2); margin: 14px 0 0; }
+
+    /* Contrast cards */
+    .contrasts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .contrast {
+      background: var(--card);
+      border: 1px solid var(--hair);
+      border-radius: 18px;
+      padding: 26px 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .contrast .k {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .contrast h3 { font-size: 1.5rem; margin: 12px 0 8px; }
+    .contrast p { margin: 0; font-size: 15px; color: var(--text-2); }
+    .contrast .usual {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--hair);
+      font-size: 13.5px; color: var(--text-3);
+    }
+    .contrast .usual b { color: var(--text-2); font-weight: 600; }
+
+    /* Steps — a real sequence, so numbered */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .step .n {
+      font-family: "Instrument Serif", serif;
+      font-size: 2.4rem;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .step h3 { font-size: 1.2rem; margin: 10px 0 6px; }
+    .step p { margin: 0; font-size: 14.5px; color: var(--text-2); }
+
+    /* Safety — dark beat, echoing the app's match screen */
+    #safety { background: var(--ink); color: #E9EAEC; }
+    #safety .eyebrow { color: #6FB8B5; }
+    #safety h2 { color: #fff; }
+    #safety .section-head p { color: #9A9DA5; }
+    .safety-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; border: 1px solid var(--ink-border); border-radius: 18px; overflow: hidden; }
+    .safety-item { background: var(--ink-surface); padding: 22px 24px; }
+    .safety-item h3 { font-size: 1.15rem; color: #fff; margin-bottom: 6px; }
+    .safety-item p { margin: 0; font-size: 14px; color: #9A9DA5; }
+
+    /* Waitlist */
+    #waitlist .box {
+      background: var(--teal);
+      color: #fff;
+      border-radius: 26px;
+      padding: 56px 40px;
+      text-align: center;
+    }
+    #waitlist .eyebrow { color: rgba(255,255,255,.7); }
+    #waitlist h2 { color: #fff; font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); margin-top: 10px; }
+    #waitlist p.lead { color: rgba(255,255,255,.82); max-width: 30rem; margin: 14px auto 0; }
+    .wl-form { margin: 28px auto 0; max-width: 30rem; }
+    .wl-rows { display: flex; flex-direction: column; gap: 8px; }
+    .wl-rows .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .wl-form input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border-radius: 11px;
+      padding: 13px 14px;
+      font: inherit; font-size: 15px;
+      outline: none;
+    }
+    .wl-form input::placeholder { color: rgba(255,255,255,.6); }
+    .wl-form input:focus { border-color: #fff; background: rgba(255,255,255,.18); }
+    .wl-form .btn {
+      width: 100%;
+      background: var(--ink);
+      margin-top: 2px;
+    }
+    .wl-form .btn:hover { background: #000; }
+    #wl-message { min-height: 18px; margin: 10px 0 0; font-size: 13px; color: rgba(255,255,255,.7); }
+    .wl-stats {
+      display: flex; align-items: center; justify-content: center; gap: 26px;
+      margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2);
+    }
+    .wl-stat .num { font-family: "Instrument Serif", serif; font-size: 1.7rem; display: block; }
+    .wl-stat .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+    .wl-div { width: 1px; height: 34px; background: rgba(255,255,255,.24); }
+
+    /* Footer */
+    footer { padding: 40px 0 56px; border-top: 1px solid var(--hair); }
+    .foot-inner { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; justify-content: space-between; }
+    .foot-inner .c { font-size: 13.5px; color: var(--text-3); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .foot-links a { font-size: 13.5px; color: var(--text-2); text-decoration: none; }
+    .foot-links a:hover { color: var(--teal-deep); }
+
+    /* Reveal on scroll (IntersectionObserver adds .visible). Gated on .js so
+       that with JavaScript disabled or broken, nothing is left invisible. */
+    .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.visible { opacity: 1; transform: none; }
+
+    /* Toast */
+    #toast {
+      position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
+      background: var(--ink); color: #fff;
+      padding: 13px 20px; border-radius: 12px; font-size: 14px;
+      opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+      z-index: 100; max-width: calc(100vw - 40px);
+    }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    #toast.error { background: var(--danger); }
+
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+      .panel { max-width: 420px; }
+      .contrasts { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .safety-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      #hero { padding: 48px 0 60px; }
+      section.band { padding: 60px 0; }
+      .steps { grid-template-columns: 1fr; }
+      .input-group { flex-direction: column; }
+      .wl-rows .row2 { grid-template-columns: 1fr; }
+      #waitlist .box { padding: 40px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .reveal, .js .reveal.visible { opacity: 1; transform: none; transition: none; }
+      #toast { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Coast</a>
+    <a href="#waitlist" class="nav-btn">Join waitlist</a>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Ride sharing · India</span>
+      <h1 class="hero-title">Someone's already going <em>your way.</em></h1>
+      <p class="hero-sub">
+        Coast shows you who's headed where you're headed — right now, near you.
+        You pick who to ride with and split the fare. No dispatch, no assigned
+        stranger, no meter.
+      </p>
+      <form id="hero-waitlist" class="hero-form" data-waitlist-form>
+        <div class="input-group">
+          <input type="email" id="hero-email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address" />
+          <button type="submit" class="btn">Get early access</button>
+        </div>
+        <p class="form-footnote">Android, launching soon. We'll email you once — no spam.</p>
+      </form>
+    </div>
+
+    <div class="panel reveal" aria-hidden="true">
+      <div class="panel-map">
+        <div class="route"></div>
+        <div class="pin a"></div>
+        <div class="pin b"></div>
+      </div>
+      <div class="panel-label"><span>Nearby now</span><span>within 5 km</span></div>
+
+      <div class="ride">
+        <div class="av">P</div>
+        <div>
+          <div class="who">Priya</div>
+          <div class="meta">HITEC City · leaves 9:15 AM</div>
+        </div>
+        <div class="seats">2 seats</div>
+      </div>
+      <div class="ride">
+        <div class="av">A</div>
+        <div>
+          <div class="who">Aisha <span class="tag-wo">women only</span></div>
+          <div class="meta">Gachibowli · leaves 9:20 AM</div>
+        </div>
+        <div class="seats">3 seats</div>
+      </div>
+      <div class="ride">
+        <div class="av">R</div>
+        <div>
+          <div class="who">Rahul</div>
+          <div class="meta">Ameerpet Metro · leaves 9:30 AM</div>
+        </div>
+        <div class="seats">1 seat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY COAST ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What's different</span>
+      <h2>Find each other, and choose.</h2>
+      <p>
+        Two things make everyday ride coordination worse than it should be: you
+        can't find people going your way, and when an app does match you, it
+        takes the choice away. Coast fixes both.
+      </p>
+    </div>
+
+    <div class="contrasts">
+      <div class="contrast reveal">
+        <div class="k">01 — Control</div>
+        <h3>You choose who</h3>
+        <p>See who's going your way, with their name and rating, and decide who to ask. Nobody is assigned to you.</p>
+        <div class="usual"><b>Usually:</b> a pooled ride puts you in a car with whoever the algorithm picked.</div>
+      </div>
+      <div class="contrast reveal">
+        <div class="k">02 — Privacy</div>
+        <h3>Your location stays fuzzy</h3>
+        <p>Coast never stores where you actually are. Every point is nudged 60–180 m before it's saved — enough to match you, not enough to find your door.</p>
+        <div class="usual"><b>Usually:</b> your exact coordinates sit in someone's database forever.</div>
+      </div>
+      <div class="contrast reveal">
+        <div class="k">03 — Money</div>
+        <h3>No payments through the app</h3>
+        <p>You settle the fare between yourselves — cash, UPI, whatever you agree. Coast doesn't process it and doesn't take a cut of your ride.</p>
+        <div class="usual"><b>Usually:</b> the platform sits in the middle of every rupee and skims it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="band" style="background:var(--card);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Post, match, ride.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">1</div>
+        <h3>Post where you're headed</h3>
+        <p>Destination, time, and how many seats you can share.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">2</div>
+        <h3>See who's near</h3>
+        <p>People going the same way show up on a live map within 5 km.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">3</div>
+        <h3>Request — they accept</h3>
+        <p>Phone numbers appear only after you both agree, and only if they chose to share theirs.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">4</div>
+        <h3>Ride and rate</h3>
+        <p>Meet up, split the fare, rate each other. Bad actors get reported and suspended.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SAFETY ================= -->
+<section id="safety" class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Safety</span>
+      <h2>Built for getting in a car with someone you just met.</h2>
+      <p>Trust is earned with real controls, not a checkmark. Here's what Coast actually gives you.</p>
+    </div>
+    <div class="safety-list">
+      <div class="safety-item reveal">
+        <h3>Match your own gender only</h3>
+        <p>Optional, and it works both ways — you only see, and are only seen by, riders of the same gender.</p>
+      </div>
+      <div class="safety-item reveal">
+        <h3>Block or report anyone</h3>
+        <p>From the rider card or the match screen. Repeat reports against the same account suspend it automatically.</p>
+      </div>
+      <div class="safety-item reveal">
+        <h3>Every ride is rated</h3>
+        <p>Both people rate each other 1–5 after the ride. Ratings are real — there's no fake score to pad a profile.</p>
+      </div>
+      <div class="safety-item reveal">
+        <h3>Share your trip in one tap</h3>
+        <p>Send who you're riding with, where, and when to someone you trust, straight from the app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WAITLIST ================= -->
+<section id="waitlist" class="band">
+  <div class="wrap">
+    <div class="box reveal">
+      <span class="eyebrow">Early access</span>
+      <h2>Be one of the first to ride.</h2>
+      <p class="lead">Join the waitlist and we'll tell you the moment Coast is on the Play Store.</p>
+      <form id="waitlist-form" class="wl-form" data-waitlist-form>
+        <div class="wl-rows">
+          <div class="row2">
+            <input type="text" id="wl-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
+            <input type="email" id="wl-email" placeholder="Email address" required autocomplete="email" aria-label="Email address" />
+          </div>
+          <input type="tel" id="wl-phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone number, optional" />
+          <button type="submit" class="btn">Join the waitlist</button>
+        </div>
+        <p id="wl-message"></p>
+      </form>
+      <div class="wl-stats">
+        <div class="wl-stat"><span class="num" id="stat-count">—</span><span class="lbl">on the list</span></div>
+        <div class="wl-div"></div>
+        <div class="wl-stat"><span class="num">Android</span><span class="lbl">first</span></div>
+        <div class="wl-div"></div>
+        <div class="wl-stat"><span class="num">Free</span><span class="lbl">to use</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="c">© 2026 Coast</div>
+    <nav class="foot-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="delete-account.html">Delete account</a>
+      <a href="mailto:support@coastnow.in">support@coastnow.in</a>
+    </nav>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script>
+(function () {
+  var cfg = window.COAST_CONFIG || {};
+  var URL_ = cfg.SUPABASE_URL, KEY = cfg.SUPABASE_ANON_KEY;
+
+  var nav = document.getElementById('nav');
+  var toast = document.getElementById('toast');
+  var toastT;
+  function showToast(msg, type) {
+    toast.textContent = msg;
+    toast.className = type || '';
+    clearTimeout(toastT);
+    requestAnimationFrame(function () { toast.classList.add('show'); });
+    toastT = setTimeout(function () { toast.classList.remove('show'); }, 4000);
+  }
+
+  // Scroll reveal
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Waitlist — degrades gracefully if site config is absent (e.g. preview)
+  var heroForm = document.getElementById('hero-waitlist');
+  var wlForm = document.getElementById('waitlist-form');
+  var wlMessage = document.getElementById('wl-message');
+  var statCount = document.getElementById('stat-count');
+  var count = null;
+
+  if (!URL_ || !KEY) {
+    if (wlMessage) wlMessage.textContent = 'Waitlist is warming up — check back shortly.';
+  } else {
+    fetch(URL_ + '/rest/v1/rpc/get_waitlist_count', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
+      body: '{}',
+    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+      var n = typeof v === 'number' ? v : parseInt(v, 10);
+      if (statCount && Number.isFinite(n)) { count = n; statCount.textContent = n; }
+    }).catch(function () {});
+
+    var submit = function (data) {
+      return fetch(URL_ + '/rest/v1/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': KEY,
+          'Authorization': 'Bearer ' + KEY,
+          'Prefer': 'resolution=merge-duplicates,return=minimal',
+        },
+        body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null }),
+      }).then(function (res) {
+        if (res.ok) {
+          count = (count == null ? 0 : count) + 1;
+          if (statCount) statCount.textContent = count;
+          showToast("You're on the list. We'll email you at launch.");
+        } else {
+          showToast('Something went wrong. Try again?', 'error');
+        }
+      }).catch(function () {
+        showToast('Network error — check your connection and try again.', 'error');
+      });
+    };
+
+    heroForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('hero-email').value.trim();
+      if (!email) return;
+      submit({ email: email }).then(function () { heroForm.reset(); });
+    });
+
+    wlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('wl-email').value.trim();
+      if (!email) return;
+      wlMessage.textContent = 'Joining…';
+      submit({
+        name: document.getElementById('wl-name').value.trim(),
+        email: email,
+        phone: document.getElementById('wl-phone').value.trim(),
+      }).then(function () { wlForm.reset(); wlMessage.textContent = ''; });
+    });
+  }
+})();
+</script>
+</body>
+</html>
