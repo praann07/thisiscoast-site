@@ -7,100 +7,175 @@
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; max-width: 800px; margin: 0 auto; padding: 24px 16px; color: #1a1a1a; }
     h1 { font-size: 1.8em; margin-bottom: 0.2em; }
-    h2 { font-size: 1.3em; margin-top: 1.5em; }
+    h2 { font-size: 1.3em; margin-top: 1.6em; }
+    h3 { font-size: 1.05em; margin-top: 1.2em; }
     p, li { color: #444; }
     .updated { color: #888; font-size: 0.85em; }
+    .note { background: #f6f6f4; border-left: 3px solid #ccc; padding: 8px 14px; font-size: 0.92em; }
     hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+    a { color: #0F7C7A; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92em; }
+    td, th { border: 1px solid #e5e5e5; padding: 6px 9px; text-align: left; vertical-align: top; }
   </style>
 </head>
 <body>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: September 2026</p>
+  <p class="updated">Last updated: 8 September 2026</p>
 
-  <p>Coast ("we", "our", or "us") operates the Coast ride-matching mobile application (the "App"). This page explains how we collect, use, and protect your personal data when you use the App.</p>
+  <p>This Privacy Policy explains how personal data is collected, used, shared,
+  and protected when you use the Coast ride-matching mobile application (the
+  &ldquo;App&rdquo;) and the Coast website at coastnow.in (the &ldquo;Site&rdquo;).</p>
 
-  <h2>1. Information We Collect</h2>
-
-  <h3>1.1 Information You Provide</h3>
+  <h2>1. Who is responsible for your data</h2>
+  <p>Coast is operated by <strong>MAMIDALA SOM PRANEETH BABU</strong>, an
+  individual based in Hyderabad, India (the &ldquo;Operator&rdquo;,
+  &ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;). For the purposes of
+  the Digital Personal Data Protection Act, 2023 (the &ldquo;DPDP Act&rdquo;),
+  the Operator is the <strong>Data Fiduciary</strong> for the personal data
+  described below.</p>
+  <p>Contact for privacy matters and grievances:</p>
   <ul>
-    <li><strong>Account information:</strong> your full name, email address, and phone number when you create an account.</li>
-    <li><strong>Trip information:</strong> destination, departure time, number of seats, and an approximate pickup area when you post a trip (see &ldquo;Approximate location&rdquo; below &mdash; your exact position is never stored).</li>
-    <li><strong>Ride requests:</strong> when you request or accept a ride, we record the connection between the two riders.</li>
-    <li><strong>Reports:</strong> if you report another user, we record the report and the associated trip.</li>
-    <li><strong>Gender (optional):</strong> a self-identified gender, only if you choose to set one. It is used solely to power the optional &ldquo;match with same gender only&rdquo; preference, and can be left unset.</li>
+    <li>Email: <strong>coastnowapp@gmail.com</strong> (the primary channel)</li>
+    <li>Grievance Officer: <strong>MAMIDALA SOM PRANEETH BABU</strong>, reachable at the email above</li>
+    <li>Postal address: <strong>CH4V+8, Hyderabad, Telangana, India</strong></li>
   </ul>
 
-  <h3>1.2 Information Collected Automatically</h3>
+  <h2>2. Personal data we collect</h2>
+
+  <h3>2.1 Data you provide</h3>
   <ul>
-    <li><strong>Approximate location:</strong> the App reads your device's location in the foreground to find trips near you. Before any trip is saved, every coordinate is offset by 60&ndash;180 metres &mdash; your precise position is never stored, logged, or shared, on our servers or anywhere else. The App does not access location while it is in the background.</li>
-    <li><strong>Push notification token:</strong> we store your device's push token so we can send ride-request alerts.</li>
-    <li><strong>Diagnostics and usage:</strong> crash reports (stack traces, device model, operating-system version, app version) and aggregate, non-identifying usage events, collected through Google Firebase (Crashlytics and Analytics) to keep the App stable and understand which features are used.</li>
+    <li><strong>Account:</strong> your full name, email address, and phone number, given when you create an account in the App.</li>
+    <li><strong>Trip details:</strong> destination, departure time, and number of seats, when you post a trip. An <em>approximate</em> pickup area is derived from your location &mdash; see 2.2.</li>
+    <li><strong>Ride requests and matches:</strong> the link between you and another rider when a request is sent, accepted, declined, or cancelled.</li>
+    <li><strong>Ratings:</strong> the rating you give a co-rider after a completed ride.</li>
+    <li><strong>Reports:</strong> if you report another user, the report and the trip it relates to.</li>
+    <li><strong>Blocks:</strong> the list of users you have blocked.</li>
+    <li><strong>Gender (optional):</strong> a self-identified gender, only if you choose to set one. It is used only to power the optional &ldquo;match with the same gender only&rdquo; preference and can be left unset or cleared at any time.</li>
+    <li><strong>Waitlist (Site):</strong> if you join the pre-launch waitlist on the Site, your email address, and optionally your name and phone number.</li>
   </ul>
 
-  <h3>1.3 Information from Third Parties</h3>
+  <h3>2.2 Data collected automatically by the App</h3>
   <ul>
-    <li><strong>OpenStreetMap / Nominatim:</strong> destination place search queries are sent to Nominatim, OpenStreetMap's geocoding service, to provide autocomplete suggestions.</li>
+    <li><strong>Approximate location:</strong> the App reads your device&rsquo;s location <em>while the App is open and in the foreground</em> to show trips near you. Before any trip is stored, every coordinate is offset by a random 60&ndash;180 metres. Your precise position is <strong>never stored, logged, or shared</strong> &mdash; only the offset (approximate) coordinate is saved. The App does <strong>not</strong> access location in the background.</li>
+    <li><strong>Push notification token:</strong> a device identifier issued by the operating system and the push service, stored so we can send you ride-request alerts. Removed if you turn notifications off in the App.</li>
+    <li><strong>Diagnostics:</strong> crash reports (stack trace, device model, operating-system version, app version) via Google Firebase Crashlytics.</li>
+    <li><strong>Usage analytics:</strong> screen views and product events (for example: a trip was posted, a request was sent, a number was revealed) via Google Firebase Analytics. Event parameters do <strong>not</strong> contain your name, phone number, email, destination text, or coordinates. Analytics events are linked to a resettable pseudonymous identifier tied to your account.</li>
+    <li><strong>Advertising identifiers are NOT collected.</strong> The Android Advertising ID and SSAID collection are disabled in the App&rsquo;s configuration.</li>
   </ul>
 
-  <h2>2. How We Use Your Information</h2>
+  <h3>2.3 Data from third parties</h3>
   <ul>
-    <li>To create and maintain your account.</li>
-    <li>To match riders heading the same way, based on location and trip details.</li>
-    <li>To send push notifications about ride requests, acceptances, and declines.</li>
-    <li>To show nearby trips on a map.</li>
-    <li>To improve the App and fix bugs.</li>
-    <li>To ensure safety — ride request records and user reports help us moderate the community.</li>
+    <li><strong>Destination search:</strong> the place-name text you type into the destination field is sent to our server, which queries OpenStreetMap&rsquo;s Nominatim geocoding service (restricted to results in India) and caches them. Your device does not contact OpenStreetMap directly.</li>
   </ul>
 
-  <h2>3. Legal Basis (GDPR)</h2>
-  <p>For users in the European Economic Area, we process your data based on:</p>
+  <h2>3. Why we use your data, and our lawful basis</h2>
+  <p>Under the DPDP Act we process personal data on the basis of your
+  <strong>consent</strong>, given when you accept this Policy at sign-up, and
+  as a <strong>legitimate use</strong> where the DPDP Act permits (for example,
+  data you voluntarily provide for a purpose you have not objected to, and use
+  necessary to provide a service you have asked for).</p>
+  <table>
+    <tr><th>Purpose</th><th>Data used</th><th>Basis</th></tr>
+    <tr><td>Create and operate your account; sign you in</td><td>Name, email, phone</td><td>Consent; service delivery</td></tr>
+    <tr><td>Match riders heading the same way and show nearby trips on a map</td><td>Approximate location, trip details</td><td>Consent; service delivery</td></tr>
+    <tr><td>Exchange phone numbers between two riders who have matched</td><td>Phone number, and only after a request is accepted and the owner has not turned off number sharing</td><td>Consent; service delivery</td></tr>
+    <tr><td>Send ride-request notifications</td><td>Push token; the counterparty&rsquo;s first name and destination text appear in the notification</td><td>Consent</td></tr>
+    <tr><td>Same-gender matching preference</td><td>Gender (optional)</td><td>Consent</td></tr>
+    <tr><td>Safety and moderation: investigate reports, suspend abusive accounts</td><td>Reports, ride-request records, blocks</td><td>Legitimate use; legal obligation where applicable</td></tr>
+    <tr><td>Keep the App stable; understand which features are used</td><td>Crash reports, usage analytics (no direct identifiers in parameters)</td><td>Legitimate use</td></tr>
+    <tr><td>Waitlist: notify you when the App launches</td><td>Email, optional name and phone</td><td>Consent</td></tr>
+  </table>
+  <p>We do <strong>not</strong> use your data for advertising, profiling for
+  advertising, or sale to third parties.</p>
+
+  <h2>4. Who we share data with</h2>
+  <p>We share personal data only with the following service providers (Data
+  Processors), who process it on our instructions:</p>
+  <table>
+    <tr><th>Provider</th><th>What they do</th><th>Where processing occurs</th></tr>
+    <tr><td>Supabase</td><td>Database, authentication, realtime, server functions &mdash; the primary store of your account and trip data</td><td>Amazon Web Services, India (Mumbai region)</td></tr>
+    <tr><td>Expo</td><td>Delivery of push notifications; app build and update infrastructure</td><td>United States</td></tr>
+    <tr><td>Google Firebase (Crashlytics, Analytics) and Firebase Cloud Messaging</td><td>Crash diagnostics, usage analytics, and Android push transport</td><td>Google infrastructure, outside India</td></tr>
+    <tr><td>Resend</td><td>Sending account emails such as one-time sign-in codes</td><td>United States</td></tr>
+    <tr><td>OpenStreetMap Foundation (Nominatim)</td><td>Destination place-search, queried by our server</td><td>European Union</td></tr>
+    <tr><td>Esri</td><td>Map background tiles displayed in the App. Esri receives the map area you are viewing, not your account data.</td><td>United States</td></tr>
+  </table>
+  <p>We may also disclose data where required by law, court order, or a lawful
+  government request, or to protect the rights or safety of users.</p>
+
+  <h2>5. Storage outside India</h2>
+  <p>Your core account and trip data are stored in India. Some processing
+  necessarily occurs outside India &mdash; specifically crash and analytics
+  data (Google/Firebase), sign-in emails (Resend), push delivery (Expo/Google),
+  and map tiles (Esri). We rely on these providers&rsquo; contractual and
+  technical safeguards. We do not transfer personal data to any country or
+  territory that the Government of India has restricted for such transfers.</p>
+
+  <h2>6. Retention and deletion</h2>
+  <p>We keep your personal data for as long as your account is active, and only
+  as long as needed for the purposes above or to meet a legal obligation.</p>
+  <p>You can delete your account and all associated data yourself, immediately,
+  from the <strong>Profile</strong> tab in the App, or by writing to
+  coastnowapp@gmail.com. This removes your profile, trips, ride requests, ride
+  history, ratings, reports, blocks, and push token from our database.</p>
+  <p class="note"><strong>One exception:</strong> crash and usage-analytics data
+  already sent to Google Firebase is retained by Google according to
+  Firebase&rsquo;s own retention settings and is not linked to your name, email,
+  or phone number. It is not deleted by deleting your Coast account. Analytics
+  identifiers reset if you create a new account.</p>
+
+  <h2>7. Your rights</h2>
+  <p>Under the DPDP Act, you have the right to:</p>
   <ul>
-    <li><strong>Consent:</strong> we ask for your permission before the App uses your device location.</li>
-    <li><strong>Contractual necessity:</strong> account creation and ride matching are necessary to provide our service.</li>
-    <li><strong>Legitimate interests:</strong> service improvement and abuse prevention.</li>
+    <li><strong>Access</strong> a summary of the personal data we hold about you and how it is processed.</li>
+    <li><strong>Correct, complete, update, or erase</strong> your personal data.</li>
+    <li><strong>Grievance redressal</strong> &mdash; raise a complaint with us about how your data is handled.</li>
+    <li><strong>Nominate</strong> another person to exercise your rights in the event of your death or incapacity.</li>
+    <li><strong>Withdraw consent</strong> at any time. You can revoke location and notification permissions in your device settings, and delete your account in the App. Withdrawing consent does not affect processing already carried out, and may mean you can no longer use the App.</li>
   </ul>
+  <p>To exercise any of these, email <strong>coastnowapp@gmail.com</strong>. We
+  will respond within a reasonable period and in any case within the timelines
+  the DPDP Act requires. If you are not satisfied with our response, you may
+  complain to the <strong>Data Protection Board of India</strong>.</p>
+  <p>Visitors in the European Economic Area or United Kingdom may additionally
+  have rights under the GDPR / UK GDPR (access, rectification, erasure,
+  restriction, portability, objection, and complaint to a supervisory
+  authority). Contact us at the same address to exercise them.</p>
 
-  <h2>4. Data Sharing</h2>
-  <p>We share data only with the following third-party service providers who process data on our behalf:</p>
-  <ul>
-    <li><strong>Supabase</strong> — database hosting, authentication, and realtime features.</li>
-    <li><strong>Expo</strong> — push notification delivery and build infrastructure.</li>
-    <li><strong>Google Firebase</strong> — crash diagnostics (Crashlytics) and aggregate usage analytics (Analytics).</li>
-    <li><strong>Resend</strong> — delivery of account emails such as one-time sign-in codes.</li>
-    <li><strong>Nominatim (OpenStreetMap)</strong> — place-search autocomplete for destinations.</li>
-  </ul>
-  <p>We do not sell your personal data to anyone.</p>
+  <h2>8. Security</h2>
+  <p>We use encrypted connections (HTTPS/TLS) for all data in transit, email
+  one-time-code authentication (no passwords to leak), row-level security so a
+  user can only read their own data, an encrypted device keystore for your
+  session, and least-privilege access to our infrastructure. No system is
+  perfectly secure, but we take reasonable safeguards appropriate to the data.</p>
 
-  <h2>5. Data Retention</h2>
-  <p>We retain your account data for as long as you maintain an active account. Trip and ride request records are retained for service continuity and safety moderation. Deleting your account removes all of it immediately — see <a href="delete-account.html">Delete Your Account</a>.</p>
+  <h2>9. Data breaches</h2>
+  <p>If a personal-data breach occurs, we will assess it promptly and, where
+  the DPDP Act requires, notify the Data Protection Board of India and each
+  affected user without undue delay.</p>
 
-  <h2>6. Your Rights</h2>
-  <p>You have the right to:</p>
-  <ul>
-    <li>Access, update, or correct your personal data.</li>
-    <li>Delete your account and associated data.</li>
-    <li>Withdraw consent for location tracking at any time via your device settings.</li>
-    <li>Opt out of push notifications via your device settings.</li>
-  </ul>
-  <p>To exercise these rights, contact us at <strong>support@coastnow.in</strong>.</p>
-  <p>You can delete your account and all associated data yourself, immediately, from the
-  <strong>Profile</strong> tab in the App. See <a href="delete-account.html">Delete Your Account</a>
-  for exactly what is removed.</p>
+  <h2>10. Children</h2>
+  <p>The App is for users <strong>18 years and older</strong>. We do not
+  knowingly collect personal data from anyone under 18. If we learn that we
+  have, we will delete it. If you believe a child has provided us data,
+  contact coastnowapp@gmail.com.</p>
 
-  <h2>7. Data Security</h2>
-  <p>We implement industry-standard security measures including encrypted connections (HTTPS), secure authentication via Supabase (email OTP), and limited access controls to protect your data.</p>
+  <h2>11. Cookies</h2>
+  <p>The App and the Site do <strong>not</strong> use cookies or similar
+  tracking technologies. See our <a href="cookie-policy.html">Cookie Policy</a>.</p>
 
-  <h2>8. Children's Privacy</h2>
-  <p>The App is not intended for users under the age of 16. We do not knowingly collect data from children.</p>
+  <h2>12. Changes to this Policy</h2>
+  <p>We may update this Policy. Material changes will be notified in the App or
+  on the Site. The &ldquo;Last updated&rdquo; date above always reflects the
+  current version.</p>
 
-  <h2>9. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. Material changes will be communicated within the App. Continued use after changes constitutes acceptance.</p>
-
-  <h2>10. Contact</h2>
-  <p>For questions or concerns about this Privacy Policy or your data, contact us at:</p>
-  <p><strong>support@coastnow.in</strong></p>
+  <h2>13. Contact</h2>
+  <p>Questions or concerns about this Policy or your personal data:
+  <strong>coastnowapp@gmail.com</strong>.</p>
 
   <hr>
-  <p class="updated">Coast Ride-Matching App</p>
+  <p class="updated">See also: <a href="terms-of-service.html">Terms of Service</a>
+  &middot; <a href="cookie-policy.html">Cookie Policy</a>
+  &middot; <a href="delete-account.html">Delete your account</a></p>
 </body>
 </html>
