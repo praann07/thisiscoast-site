@@ -1,6 +1,6 @@
 # Coast — marketing site
 
-Static site for [coastnow.in](https://coastnow.in). Served by GitHub Pages
+Static site for [coastapp.in](https://coastapp.in). Served by GitHub Pages
 (Settings → Pages → Deploy from a branch → `main` / root).
 
 - `index.html` — landing page (self-contained: inline CSS/JS, Google Fonts)
