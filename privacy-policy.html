@@ -6,23 +6,20 @@
   <title>Privacy Policy - Coast</title>
   <meta name="description" content="How Coast collects, uses and protects your data: location privacy, phone-number sharing, and your rights.">
   <link rel="canonical" href="https://coastapp.in/privacy-policy.html">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; max-width: 800px; margin: 0 auto; padding: 24px 16px; color: #1a1a1a; }
-    h1 { font-size: 1.8em; margin-bottom: 0.2em; }
-    h2 { font-size: 1.3em; margin-top: 1.6em; }
-    h3 { font-size: 1.05em; margin-top: 1.2em; }
-    p, li { color: #444; }
-    .updated { color: #888; font-size: 0.85em; }
-    .note { background: #f6f6f4; border-left: 3px solid #ccc; padding: 8px 14px; font-size: 0.92em; }
-    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
-    a { color: #0F7C7A; }
-    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92em; }
-    td, th { border: 1px solid #e5e5e5; padding: 6px 9px; text-align: left; vertical-align: top; }
-  </style>
+  <meta name="theme-color" content="#0F7C7A">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
+<header class="site-head site-head--static">
+  <div class="site-head__row">
+    <a class="logo" href="index.html" aria-label="Coast, home"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="3.4" fill="currentColor" stroke="none"/><path d="M16 9.4a6.6 6.6 0 1 0 6.6 6.6" opacity=".85"/><path d="M16 3.8a12.2 12.2 0 1 0 12.2 12.2" opacity=".5"/></svg>Coast</a>
+    <a class="btn btn--teal btn--small" href="index.html">Back to home</a>
+  </div>
+</header>
+<main class="prose">
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 8 September 2026</p>
+  <p class="updated">Last updated: 31 October 2026</p>
 
   <p>This Privacy Policy explains how personal data is collected, used, shared,
   and protected when you use the Coast ride-matching mobile application (the
@@ -76,25 +73,25 @@
   as a <strong>legitimate use</strong> where the DPDP Act permits (for example,
   data you voluntarily provide for a purpose you have not objected to, and use
   necessary to provide a service you have asked for).</p>
-  <table>
+  <div class="table-scroll"><table>
     <tr><th>Purpose</th><th>Data used</th><th>Basis</th></tr>
     <tr><td>Create and operate your account; sign you in</td><td>Name, email, phone</td><td>Consent; service delivery</td></tr>
     <tr><td>Confirm you meet the 18+ minimum age to use the App</td><td>Age</td><td>Consent; legal obligation</td></tr>
     <tr><td>Match riders heading the same way and show nearby trips on a map</td><td>Approximate location, trip details</td><td>Consent; service delivery</td></tr>
-    <tr><td>Exchange phone numbers between two riders who have matched</td><td>Phone number, and only after a request is accepted and the owner has not turned off number sharing</td><td>Consent; service delivery</td></tr>
+    <tr><td>Exchange phone numbers between two riders who have matched</td><td>Phone number, and only after a request is accepted and the owner has turned number sharing on (it is off by default)</td><td>Consent; service delivery</td></tr>
     <tr><td>Send ride-request notifications</td><td>Push token; the counterparty&rsquo;s first name and destination text appear in the notification</td><td>Consent</td></tr>
     <tr><td>Same-gender matching preference</td><td>Gender (optional)</td><td>Consent</td></tr>
     <tr><td>Safety and moderation: investigate reports, suspend abusive accounts</td><td>Reports, ride-request records, blocks</td><td>Legitimate use; legal obligation where applicable</td></tr>
     <tr><td>Keep the App stable; understand which features are used</td><td>Crash reports, usage analytics (no direct identifiers in parameters)</td><td>Legitimate use</td></tr>
     <tr><td>Waitlist: notify you when the App launches</td><td>Email, optional name and phone</td><td>Consent</td></tr>
-  </table>
+  </table></div>
   <p>We do <strong>not</strong> use your data for advertising, profiling for
   advertising, or sale to third parties.</p>
 
   <h2>4. Who we share data with</h2>
   <p>We share personal data only with the following service providers (Data
   Processors), who process it on our instructions:</p>
-  <table>
+  <div class="table-scroll"><table>
     <tr><th>Provider</th><th>What they do</th><th>Where processing occurs</th></tr>
     <tr><td>Supabase</td><td>Database, authentication, realtime, server functions &mdash; the primary store of your account and trip data</td><td>Amazon Web Services, India (Mumbai region)</td></tr>
     <tr><td>Expo</td><td>Delivery of push notifications; app build and update infrastructure</td><td>United States</td></tr>
@@ -102,7 +99,7 @@
     <tr><td>Resend</td><td>Sending account emails such as one-time sign-in codes</td><td>United States</td></tr>
     <tr><td>OpenStreetMap Foundation (Nominatim)</td><td>Destination place-search, queried by our server</td><td>European Union</td></tr>
     <tr><td>Esri</td><td>Map background tiles displayed in the App. Esri receives the map area you are viewing, not your account data.</td><td>United States</td></tr>
-  </table>
+  </table></div>
   <p>We may also disclose data where required by law, court order, or a lawful
   government request, or to protect the rights or safety of users.</p>
 
@@ -180,5 +177,21 @@
   <p class="updated">See also: <a href="terms-of-service.html">Terms of Service</a>
   &middot; <a href="cookie-policy.html">Cookie Policy</a>
   &middot; <a href="delete-account.html">Delete your account</a></p>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__row">
+      <a class="logo" href="index.html"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="3.4" fill="currentColor" stroke="none"/><path d="M16 9.4a6.6 6.6 0 1 0 6.6 6.6" opacity=".85"/><path d="M16 3.8a12.2 12.2 0 1 0 12.2 12.2" opacity=".5"/></svg>Coast</a>
+      <nav class="site-foot__nav" aria-label="Footer">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <a href="delete-account.html">Delete account</a>
+        <a href="mailto:coastnowapp@gmail.com">coastnowapp@gmail.com</a>
+      </nav>
+    </div>
+    <div class="site-foot__fine"><span>&copy; 2026 Coast. Made in India.</span></div>
+  </div>
+</footer>
 </body>
 </html>

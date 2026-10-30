@@ -2,919 +2,335 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coast — Share the ride with someone already going your way</title>
-  <meta name="description" content="You're going somewhere. So is someone nearby. Coast puts you on the same ride — you choose who, split the fare, and your location and number stay yours. Android, India." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coast: share a ride with someone already going your way</title>
+  <meta name="description" content="Coast shows you the people near you heading the same way, right now. You choose who to ride with and split the fare. Free on Google Play for Android, across India." />
   <meta name="robots" content="index, follow" />
-  <meta name="author" content="Coast" />
+  <meta name="theme-color" content="#0F7C7A" />
   <link rel="canonical" href="https://coastapp.in/" />
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://coastapp.in/" />
-  <meta property="og:title" content="Coast — Share the ride with someone already going your way" />
-  <meta property="og:description" content="You choose who to ride with. Your location and number stay yours. No payments through the app." />
+  <meta property="og:title" content="Coast: share a ride with someone already going your way" />
+  <meta property="og:description" content="See who's heading your way, pick who to ride with, split the fare. Free on Google Play." />
   <meta property="og:image" content="https://coastapp.in/og-image.png" />
   <meta property="og:site_name" content="Coast" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Coast — Share the ride with someone already going your way" />
+  <meta name="twitter:title" content="Coast: share a ride with someone already going your way" />
+  <meta name="twitter:description" content="See who's heading your way, pick who to ride with, split the fare. Free on Google Play." />
   <meta name="twitter:image" content="https://coastapp.in/og-image.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="fonts/instrument-serif-400.woff2" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
+  <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
   <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/home.css" />
 
-  <style>
-    /* Self-hosted display face — reliable, fast, no fallback flash on the LCP headline. */
-    @font-face {
-      font-family:"Instrument Serif"; font-style:normal; font-weight:400; font-display:swap;
-      src:url("fonts/instrument-serif-400.woff2") format("woff2");
-    }
-    @font-face {
-      font-family:"Instrument Serif"; font-style:italic; font-weight:400; font-display:swap;
-      src:url("fonts/instrument-serif-400-italic.woff2") format("woff2");
-    }
-    :root {
-      --paper:#F6F4F1; --card:#FFFFFF;
-      --ink:#0E0F13; --ink-2:#1B1D24; --ink-line:#2A2D37;
-      --teal:#0F7C7A; --teal-deep:#0A5F5D; --teal-soft:#E4EFEE; --teal-lift:#2FB9B5;
-      --text:#1A1B1E; --text-2:#56585F; --text-3:#8A8D95;
-      --line:#E6E2DC;
-      --maxw:1160px;
-      --ease:cubic-bezier(.2,.7,.2,1);
-    }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      margin:0; background:var(--paper); color:var(--text);
-      font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
-    }
-    h1,h2,h3 {
-      font-family:"Instrument Serif",Georgia,serif; font-weight:400;
-      line-height:1.06; letter-spacing:.01em; margin:0; text-wrap:balance;
-    }
-    .wrap { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
-    .eyebrow {
-      font-family:"IBM Plex Mono",ui-monospace,monospace;
-      font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
-      color:var(--teal-deep); margin:0;
-    }
-    a { color:inherit; }
-    button { font:inherit; cursor:pointer; }
-    :focus-visible { outline:2px solid var(--teal); outline-offset:3px; border-radius:4px; }
-
-    /* ---------- NAV ---------- */
-    #nav {
-      position:fixed; inset:0 0 auto 0; z-index:40;
-      display:flex; align-items:center; justify-content:space-between;
-      max-width:var(--maxw); margin:0 auto; padding:16px 24px;
-      transition:padding .3s var(--ease);
-    }
-    .logo {
-      font-family:"Instrument Serif",serif; font-style:italic; font-size:26px;
-      color:#fff; text-decoration:none; letter-spacing:.02em;
-      transition:color .4s var(--ease);
-    }
-    #nav.past-hero .logo { color:var(--text); }
-    .nav-cta {
-      font-size:13.5px; font-weight:600; text-decoration:none; color:#fff;
-      border:1px solid rgba(255,255,255,.28); padding:8px 16px; border-radius:999px;
-      transition:background .2s var(--ease), border-color .2s var(--ease), color .4s var(--ease);
-    }
-    .nav-cta:hover { background:rgba(255,255,255,.12); }
-    #nav.past-hero .nav-cta { color:#fff; background:var(--teal); border-color:var(--teal); }
-    #nav.past-hero .nav-cta:hover { background:var(--teal-deep); }
-
-    /* ---------- HERO (dark beat) ---------- */
-    #hero {
-      position:relative; min-height:100svh; display:flex; align-items:center;
-      background:radial-gradient(120% 90% at 72% 20%, #1a232b 0%, #12181e 45%, var(--ink) 100%);
-      color:#fff; overflow:hidden;
-    }
-    #ribbon {
-      position:absolute; inset:0; width:100%; height:100%;
-      display:block; z-index:1;
-    }
-    #hero .wrap { position:relative; z-index:2; width:100%; padding-top:96px; padding-bottom:96px; }
-    #hero .eyebrow { color:#6FBFBC; }
-    .hero-title {
-      font-size:clamp(2.9rem,1.8rem+4.4vw,5.2rem);
-      margin:18px 0 0; max-width:16ch;
-    }
-    .hero-title em { font-style:italic; color:var(--teal-lift); }
-    .hero-sub {
-      margin:22px 0 0; max-width:32rem; font-size:1.05rem; color:rgba(255,255,255,.72);
-    }
-    .hero-form { margin-top:34px; max-width:30rem; }
-    .field {
-      display:flex; gap:8px; background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:6px;
-      backdrop-filter:blur(6px);
-    }
-    .field input {
-      flex:1; min-width:0; border:0; background:transparent; color:#fff;
-      font:inherit; font-size:15px; padding:12px 14px; outline:none;
-    }
-    .field input::placeholder { color:rgba(255,255,255,.5); }
-    .btn {
-      border:0; font-weight:600; font-size:15px; color:#fff; background:var(--teal);
-      border-radius:10px; padding:12px 22px; white-space:nowrap;
-      transition:background .15s var(--ease), transform .15s var(--ease);
-    }
-    .btn:hover { background:var(--teal-deep); transform:translateY(-1px); }
-    .hero-foot {
-      margin:14px 4px 0; font-size:12.5px; letter-spacing:.02em;
-      color:rgba(255,255,255,.55);
-      font-family:"IBM Plex Mono",monospace;
-    }
-    .scrollcue {
-      position:absolute; left:50%; bottom:26px; transform:translateX(-50%);
-      z-index:2; display:flex; flex-direction:column; align-items:center; gap:7px;
-      font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.22em;
-      text-transform:uppercase; color:rgba(255,255,255,.4);
-    }
-    .scrollcue i {
-      width:1px; height:34px; background:linear-gradient(rgba(255,255,255,.5),transparent);
-      animation:cue 2.4s var(--ease) infinite;
-    }
-    @keyframes cue { 0%{transform:scaleY(0);transform-origin:top} 40%{transform:scaleY(1);transform-origin:top} 60%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
-
-    /* ---------- STORY BEATS (paper) ---------- */
-    .beat { padding:clamp(84px,7vw,140px) 0; position:relative; }
-    .beat-head { max-width:36rem; margin-bottom:52px; }
-    .beat-head h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
-    .beat-lead { margin:16px 0 0; color:var(--text-2); font-size:1.06rem; max-width:34rem; }
-
-    /* Beat 1 — "someone opens the app and finds someone nearby" scene */
-    .idea-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
-    .scene svg { display:block; width:100%; max-width:460px; height:auto; margin:0 auto; }
-    .scene .idea-link { stroke-dasharray:var(--len,210); stroke-dashoffset:var(--len,210); }
-    .js .scene.in .idea-link { transition:stroke-dashoffset 1.1s var(--ease) .5s; stroke-dashoffset:0; }
-    /* opacity only — an SVG element's transform="" attribute must not be
-       clobbered by a CSS transform, so figures just fade in. */
-    .js .scene .fig { opacity:0; }
-    .js .scene.in .figA { transition:opacity .6s var(--ease) .1s; opacity:1; }
-    .js .scene.in .figB { transition:opacity .6s var(--ease) .38s; opacity:1; }
-    .scene .pr { fill:none; stroke:var(--teal); stroke-width:2; transform-box:fill-box; transform-origin:center; opacity:0; }
-    .scene .sig { opacity:.15; }
-    @media (prefers-reduced-motion:no-preference) {
-      .js .scene.in .pr1 { animation:idea-ping 3s ease-out infinite; }
-      .js .scene.in .pr2 { animation:idea-ping 3s ease-out infinite 1s; }
-      .js .scene.in .pr3 { animation:idea-ping 3s ease-out infinite 2s; }
-      .js .scene.in .sig { animation:idea-sig 2.4s ease-in-out infinite; }
-      .js .scene.in .s2 { animation-delay:.35s; }
-      .js .scene.in .s3 { animation-delay:.7s; }
-      .js .scene.in .phone { animation:idea-phone 2.6s ease-in-out infinite; }
-    }
-    @keyframes idea-ping  { from { transform:scale(.3); opacity:.5; } to { transform:scale(6); opacity:0; } }
-    @keyframes idea-sig   { 0%,100% { opacity:.15; } 50% { opacity:1; } }
-    @keyframes idea-phone { 0%,100% { opacity:.72; } 50% { opacity:1; } }
-
-    /* Beat 3 — route of steps */
-    .steps { position:relative; }
-    .steps-line { position:absolute; left:0; right:0; top:28px; height:2px;
-      background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 13px); }
-    .js .steps-line::after { content:""; position:absolute; inset:0; background:var(--teal);
-      transform:scaleX(0); transform-origin:left; transition:transform 1.6s var(--ease); }
-    .js .steps.in .steps-line::after { transform:scaleX(1); }
-    .steps-row { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
-    .step { text-align:left; }
-    .step .node {
-      width:56px; height:56px; border-radius:50%; background:var(--card);
-      border:1px solid var(--line); display:grid; place-items:center; color:var(--teal-deep);
-      box-shadow:0 1px 2px rgba(14,15,19,.04);
-    }
-    .step h3 { font-size:1.18rem; margin:16px 0 4px; }
-    .step p { margin:0; font-size:13.5px; color:var(--text-3); font-family:"IBM Plex Mono",monospace; letter-spacing:.02em; }
-
-    /* Beat 4 — yours stays yours (dark) */
-    #privacy { background:var(--ink); color:#E9EAEC; }
-    #privacy .eyebrow { color:#6FBFBC; }
-    #privacy .beat-lead { color:#9A9DA5; }
-    .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
-      border:1px solid var(--ink-line); border-radius:20px; overflow:hidden; }
-    .tile { background:var(--ink-2); padding:30px 26px; }
-    .tile .fig { height:96px; display:grid; place-items:center; margin-bottom:16px; }
-    .tile h3 { font-size:1.15rem; color:#fff; }
-    .tile p { margin:6px 0 0; font-size:13px; color:#9A9DA5; }
-    .fuzz-pin { position:relative; width:96px; height:96px; }
-    .fuzz-pin .ring { position:absolute; inset:0; border:1px dashed rgba(47,185,181,.5); border-radius:50%; }
-    .fuzz-pin .dot { position:absolute; left:50%; top:50%; width:14px; height:14px; margin:-7px 0 0 -3px;
-      background:var(--teal-lift); border-radius:50% 50% 50% 0; transform:rotate(-45deg); filter:blur(1.4px); }
-    .fuzz-pin .m { position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
-      font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.1em; color:#6FBFBC; }
-
-    /* ---------- CTA ---------- */
-    #cta { background:var(--teal); color:#fff; }
-    #cta .box { text-align:center; padding:clamp(56px,6vw,90px) 0; }
-    #cta .eyebrow { color:rgba(255,255,255,.68); }
-    #cta h2 { font-size:clamp(2rem,1.4rem+2.4vw,3.1rem); margin-top:12px; }
-    #cta .lead { margin:14px auto 0; max-width:28rem; color:rgba(255,255,255,.85); }
-    .cta-form { max-width:30rem; margin:30px auto 0; display:flex; flex-direction:column; gap:8px; }
-    .cta-form .two { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .cta-form input { width:100%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.13);
-      color:#fff; border-radius:11px; padding:13px 14px; font:inherit; font-size:15px; outline:none; }
-    .cta-form input::placeholder { color:rgba(255,255,255,.62); }
-    .cta-form input:focus { border-color:#fff; background:rgba(255,255,255,.2); }
-    .cta-form .btn { width:100%; background:var(--ink); }
-    .cta-form .btn:hover { background:#000; }
-    #wl-message { min-height:18px; margin:10px 0 0; font-size:13px; color:rgba(255,255,255,.72); }
-    .cta-stats { display:flex; align-items:center; justify-content:center; gap:24px;
-      margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.22); }
-    .cta-stats .n { font-family:"Instrument Serif",serif; font-size:1.7rem; display:block; }
-    .cta-stats .l { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.62); }
-    .cta-stats i { width:1px; height:32px; background:rgba(255,255,255,.24); }
-
-    /* ---------- FOOTER ---------- */
-    footer { background:var(--ink); color:rgba(255,255,255,.5); padding:40px 0 52px; }
-    .foot { display:flex; flex-wrap:wrap; gap:16px 28px; align-items:center; justify-content:space-between; }
-    .foot .logo { color:#fff; font-size:22px; }
-    .foot nav { display:flex; flex-wrap:wrap; gap:20px; }
-    .foot a { font-size:13.5px; color:rgba(255,255,255,.72); text-decoration:none; }
-    .foot a:hover { color:#fff; }
-    .foot-by { display:flex; flex-wrap:wrap; gap:6px 22px; justify-content:space-between;
-      margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.1);
-      font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.04em; color:rgba(255,255,255,.42); }
-    .foot-by a { color:rgba(255,255,255,.72); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.25); }
-    .foot-by a:hover { color:#fff; border-color:var(--teal-lift); }
-
-    /* ---------- SCREENSHOTS ---------- */
-    .shots { background:var(--ink); color:#E9EAEC; padding:clamp(72px,7vw,120px) 0; }
-    .shots .eyebrow { color:#6FBFBC; }
-    .shots-grid { display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:center; }
-    .shots h2 { font-size:clamp(1.9rem,1.4rem+2vw,2.9rem); margin-top:12px; color:#fff; }
-    .shots-lead { margin:20px 0 0; color:#B9BDC2; font-size:1.06rem; line-height:1.6; max-width:34rem; }
-    .phone { display:flex; justify-content:center; }
-    .phone-frame {
-      position:relative; width:250px; aspect-ratio:9 / 19.2; border-radius:34px;
-      background:linear-gradient(160deg,#20242c,#12151b); padding:9px;
-      box-shadow:0 40px 90px -28px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.06);
-    }
-    .phone-frame::after { content:""; position:absolute; inset:16px -18px -18px 16px; border-radius:34px; background:rgba(255,255,255,.03); z-index:-1; }
-    .phone-pill { position:absolute; left:50%; top:16px; transform:translateX(-50%); width:74px; height:20px; background:#0b0d11; border-radius:12px; z-index:2; }
-    .phone-screen { position:relative; height:100%; border-radius:26px; overflow:hidden; background:#0b0d11; }
-    .phone-screen::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,0) 42%); }
-    .phone-screen img { width:100%; height:100%; object-fit:cover; display:block; }
-    .shot { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-      background:radial-gradient(120% 80% at 50% 18%, #123f3e, #0e1a1f 62%, #0b0d11); }
-    .shot-word { font-family:"Instrument Serif",serif; font-style:italic; font-size:30px; color:rgba(255,255,255,.72); }
-    .shot-tag { position:relative; overflow:hidden; font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#5f7d7b; }
-
-    /* ---------- HERO ENTRANCE ---------- */
-    @keyframes heroRise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
-    @keyframes ribbonIn { from { opacity:0; } to { opacity:1; } }
-    @keyframes shimmer { to { transform:translateX(100%); } }
-    @keyframes spin { to { transform:rotate(360deg); } }
-    @keyframes fuzzpulse { 0%,100% { opacity:.72; filter:blur(1.4px);} 50% { opacity:1; filter:blur(2.3px);} }
-
-    @media (prefers-reduced-motion:no-preference) {
-      .js #hero .eyebrow { animation:heroRise .55s var(--ease) both .16s; }
-      .js .hero-title    { animation:heroRise .6s  var(--ease) both .28s; }
-      .js .hero-sub      { animation:heroRise .55s var(--ease) both .42s; }
-      .js .hero-form     { animation:heroRise .55s var(--ease) both .54s; }
-      .js .scrollcue     { animation:heroRise .6s  var(--ease) both 1.3s; }
-      .js #ribbon        { animation:ribbonIn 1s ease both .1s; }
-      .js .fuzz-pin .ring { animation:spin 16s linear infinite; }
-      .js .fuzz-pin .dot  { animation:fuzzpulse 3.4s var(--ease) infinite; }
-      .js .shot-tag::after { content:""; position:absolute; inset:0; transform:translateX(-100%);
-        background:linear-gradient(90deg,transparent,rgba(120,235,231,.5),transparent); animation:shimmer 2.8s ease-in-out infinite; }
-    }
-
-    /* ---------- MICRO-INTERACTIONS ---------- */
-    .btn:active { transform:translateY(0) scale(.97); }
-    .field:focus-within { border-color:var(--teal-lift); box-shadow:0 0 0 3px rgba(47,185,181,.22); }
-    .cta-form input:focus { border-color:#fff; background:rgba(255,255,255,.2); box-shadow:0 0 0 3px rgba(255,255,255,.22); }
-    #nav::before {
-      content:""; position:fixed; left:0; right:0; top:0; height:62px; z-index:-1; pointer-events:none;
-      background:color-mix(in srgb, var(--paper) 86%, transparent); border-bottom:1px solid var(--line);
-      -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-      opacity:0; transition:opacity .35s var(--ease);
-    }
-    #nav.past-hero::before { opacity:1; }
-    a.scrollcue { text-decoration:none; }
-
-    /* ---------- HEADLINE WIPE-REVEAL ---------- */
-    .js .rise h2 { clip-path:inset(0 0 108% 0); transform:translateY(.3em); }
-    .js .rise.in h2 { clip-path:inset(-30% 0 -30% 0); transform:none;
-      transition:clip-path .95s var(--ease) .06s, transform .95s var(--ease) .06s; }
-
-    /* ---------- PHONE — idle float + cursor tilt (JS adds the tilt) ---------- */
-    .phone-frame { transition:transform .3s var(--ease); will-change:transform; }
-    @media (prefers-reduced-motion:no-preference) {
-      .js .phone.in .phone-frame { animation:phoneFloat 7s ease-in-out infinite; }
-    }
-    @keyframes phoneFloat { 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-9px) rotate(-.5deg); } }
-
-    /* ---------- STAGGERED REVEALS ---------- */
-    .js .tiles.rise .tile { opacity:0; transform:translateY(16px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
-    .js .tiles.rise.in .tile { opacity:1; transform:none; }
-    .js .tiles.rise.in .tile:nth-child(1){ transition-delay:.05s; }
-    .js .tiles.rise.in .tile:nth-child(2){ transition-delay:.14s; }
-    .js .tiles.rise.in .tile:nth-child(3){ transition-delay:.23s; }
-
-    .js .steps .step { opacity:0; transform:translateY(14px); transition:opacity .5s var(--ease), transform .5s var(--ease); }
-    .js .steps.in .step { opacity:1; transform:none; }
-    .js .steps.in .step:nth-child(1){ transition-delay:.12s; }
-    .js .steps.in .step:nth-child(2){ transition-delay:.6s; }
-    .js .steps.in .step:nth-child(3){ transition-delay:1.1s; }
-
-    .js .phone { opacity:0; transform:translateY(26px) rotate(2deg); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-    .js .phone.in { opacity:1; transform:none; }
-
-    /* reveal */
-    .js .rise { opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
-    .js .rise.in { opacity:1; transform:none; }
-
-    #toast { position:fixed; left:50%; bottom:26px; transform:translate(-50%,18px); z-index:100;
-      background:var(--ink); color:#fff; padding:13px 20px; border-radius:12px; font-size:14px;
-      opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
-      max-width:calc(100vw - 40px); }
-    #toast.show { opacity:1; transform:translate(-50%,0); }
-    #toast.error { background:#D8432B; }
-
-    @media (max-width:860px) {
-      .idea-grid, .shots-grid { grid-template-columns:1fr; gap:40px; }
-      .scene, .phone { order:-1; }
-      .steps-row { grid-template-columns:1fr; gap:28px; }
-      .steps-line { display:none; }
-      .js .steps.in .step:nth-child(n){ transition-delay:.1s; }
-      .tiles { grid-template-columns:1fr; }
-      .phone-frame::after { display:none; }
-    }
-    @media (max-width:520px) {
-      #hero .wrap { padding-top:88px; }
-      .field { flex-direction:column; }
-      .cta-form .two { grid-template-columns:1fr; }
-      .steps-row { grid-template-columns:1fr; }
-    }
-    @media (prefers-reduced-motion:reduce) {
-      html { scroll-behavior:auto; }
-      .js .rise, .js .rise.in { opacity:1; transform:none; transition:none; }
-      .js .scene .fig, .js .scene.in .fig { opacity:1 !important; transition:none !important; }
-      .js .scene .idea-link { stroke-dashoffset:0 !important; transition:none !important; }
-      .js .scene .pr { animation:none !important; opacity:0 !important; }
-      .js .scene .sig { animation:none !important; opacity:.5 !important; }
-      .js .scene .phone { animation:none !important; opacity:1 !important; }
-      .js .steps-line::after { transform:scaleX(1); transition:none; }
-      .scrollcue i { animation:none; }
-      #toast { transition:none; }
-      .js #hero .eyebrow, .js .hero-title, .js .hero-sub, .js .hero-form,
-      .js .scrollcue, .js #ribbon { animation:none !important; opacity:1 !important; transform:none !important; }
-      .js .tiles.rise .tile, .js .steps .step, .js .phone {
-        opacity:1 !important; transform:none !important; transition:none !important;
-      }
-      .js .rise h2, .js .rise.in h2 { clip-path:none !important; transform:none !important; transition:none !important; }
-      .js .phone.in .phone-frame { animation:none !important; }
-      .js .fuzz-pin .ring, .js .fuzz-pin .dot { animation:none !important; }
-      .shot-tag::after { animation:none !important; }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Coast",
+    "url": "https://coastapp.in/",
+    "operatingSystem": "ANDROID",
+    "applicationCategory": "TravelApplication",
+    "description": "Find people near you heading the same way, choose who to ride with, and split the fare.",
+    "installUrl": "https://play.google.com/store/apps/details?id=in.coastapp.app",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav id="nav">
-  <a href="#" class="logo">Coast</a>
-  <a href="#cta" class="nav-cta">Join waitlist</a>
-</nav>
-
-<!-- ================= HERO ================= -->
-<header id="hero">
-  <canvas id="ribbon" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <p class="eyebrow">Ride sharing · India</p>
-    <h1 class="hero-title">Someone's already going <em>your way.</em></h1>
-    <p class="hero-sub">See who's headed where you're headed, right now, near you. Pick who to ride with and split the fare.</p>
-    <form id="hero-form" class="hero-form">
-      <div class="field">
-        <input type="email" id="hero-email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address" />
-        <button type="submit" class="btn">Get early access</button>
-      </div>
-      <p class="hero-foot">Android · launching soon · one email, no spam</p>
-    </form>
+<header class="site-head on-dark" id="head">
+  <div class="site-head__row">
+    <a class="logo" href="/" aria-label="Coast, home">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <circle cx="16" cy="16" r="3.4" fill="currentColor" stroke="none"/>
+        <path d="M16 9.4a6.6 6.6 0 1 0 6.6 6.6" opacity=".85"/>
+        <path d="M16 3.8a12.2 12.2 0 1 0 12.2 12.2" opacity=".5"/>
+      </svg>
+      Coast
+    </a>
+    <a class="btn btn--rick btn--small" href="https://play.google.com/store/apps/details?id=in.coastapp.app&amp;referrer=utm_source%3Dcoastapp.in%26utm_medium%3Dweb%26utm_campaign%3Dheader">Install</a>
   </div>
-  <a href="#idea" class="scrollcue" aria-label="Skip to content"><i></i>Scroll</a>
 </header>
 
-<!-- ================= BEAT 1 — the idea ================= -->
-<section class="beat" id="idea">
-  <div class="wrap idea-grid">
-    <div class="rise">
-      <p class="eyebrow">The idea</p>
-      <h2>You're not the only one heading that way.</h2>
-      <p class="beat-lead">Open Coast and it shows you people nearby going where you're going. One of you asks, the other says yes, and you split the ride.</p>
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero on-dark" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1 class="hero__title" id="hero-title">Someone's already going your way.</h1>
+      <p class="hero__lede">Coast shows you the people near you heading the same way, right now. You choose who to ride with and split the fare between you.</p>
+      <div class="hero__cta">
+        <a class="btn btn--rick" href="https://play.google.com/store/apps/details?id=in.coastapp.app&amp;referrer=utm_source%3Dcoastapp.in%26utm_medium%3Dweb%26utm_campaign%3Dhero">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.2v17.6a.9.9 0 0 0 1.35.78l15-8.8a.9.9 0 0 0 0-1.56l-15-8.8A.9.9 0 0 0 5 3.2Z"/></svg>
+          Get it on Google Play
+        </a>
+        <a class="hero__link" href="#how">See how it works</a>
+      </div>
+      <p class="hero__meta">Free. Android. Works across India.</p>
+
+      <div class="qr">
+        <div class="qr__tile"><img src="play-qr.svg" width="76" height="76" alt="QR code that opens Coast on Google Play" /></div>
+        <p>On a laptop? Scan this with your phone to open Coast in the Play Store.</p>
+      </div>
     </div>
 
-    <div class="scene rise">
-      <svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One person opens Coast, it finds someone nearby, and the two connect">
-        <ellipse cx="150" cy="286" rx="52" ry="9" fill="rgba(20,25,25,.06)"/>
-        <ellipse cx="345" cy="268" rx="44" ry="8" fill="rgba(20,25,25,.05)"/>
+    <div class="demo" id="demo">
+      <div class="radar">
+        <svg class="radar__svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <path class="radar__road" d="M-5 62 Q 25 52 50 58 T 105 44"/>
+          <path class="radar__road" d="M30 -5 Q 38 25 34 50 T 44 105"/>
+          <path class="radar__road" d="M-5 20 Q 30 28 62 14 T 105 26"/>
+          <path class="radar__road" d="M78 -5 Q 70 30 80 55 T 72 105"/>
+          <circle class="radar__ring radar__ring--outer" style="--i:2" cx="50" cy="40" r="40"/>
+          <circle class="radar__ring" style="--i:1" cx="50" cy="40" r="27"/>
+          <circle class="radar__ring" style="--i:0" cx="50" cy="40" r="13"/>
+          <text class="radar__label" x="50" y="25.8">1 km</text>
+          <text class="radar__label" x="50" y="12.8">3 km</text>
+          <text class="radar__label" x="50" y="-.4">5 km</text>
+        </svg>
 
-        <!-- radar ping from person A's phone -->
-        <circle class="pr pr1" cx="171" cy="236" r="10"/>
-        <circle class="pr pr2" cx="171" cy="236" r="10"/>
-        <circle class="pr pr3" cx="171" cy="236" r="10"/>
+        <div class="you" aria-hidden="true"><span class="you__dot"></span><span class="you__tag">You</span></div>
 
-        <!-- the connection + a signal travelling along it -->
-        <path class="idea-link" d="M172 234 Q 258 186 336 220" fill="none" stroke="#0F7C7A" stroke-width="2" stroke-linecap="round" style="--len:210"/>
-        <circle class="sig s1" cx="214" cy="215" r="3.5" fill="#0F7C7A"/>
-        <circle class="sig s2" cx="256" cy="207" r="3.5" fill="#0F7C7A"/>
-        <circle class="sig s3" cx="297" cy="208" r="3.5" fill="#0F7C7A"/>
+        <button class="rider" type="button" aria-pressed="false" style="--x:24%;--y:18%;--mx:20%;--my:15%;--i:0"
+          data-name="Aisha" data-to="Hitec City" data-at="9:20 AM" data-seats="3 seats" data-tag="Women only">
+          <span class="rider__dot"></span><span class="rider__chip">Aisha to Hitec City</span>
+        </button>
+        <button class="rider" type="button" aria-pressed="false" style="--x:60%;--y:27%;--mx:46%;--my:28%;--i:1"
+          data-name="Priya" data-to="Gachibowli" data-at="9:15 AM" data-seats="2 seats">
+          <span class="rider__dot"></span><span class="rider__chip">Priya to Gachibowli</span>
+        </button>
+        <button class="rider rider--left" type="button" aria-pressed="false" style="--x:82%;--y:67%;--mx:80%;--my:69%;--i:2"
+          data-name="Rahul" data-to="Ameerpet" data-at="9:30 AM" data-seats="1 seat">
+          <span class="rider__dot"></span><span class="rider__chip">Rahul to Ameerpet</span>
+        </button>
+        <button class="rider" type="button" aria-pressed="false" style="--x:9%;--y:50%;--mx:8%;--my:57%;--i:3"
+          data-name="Karthik" data-to="Uppal" data-at="9:40 AM" data-seats="2 seats">
+          <span class="rider__dot"></span><span class="rider__chip">Karthik to Uppal</span>
+        </button>
+      </div>
 
-        <!-- person A (foreground, holding the phone) -->
-        <g class="fig figA" transform="translate(150 206)">
-          <path d="M-20 78 C -20 34 -14 26 0 26 C 14 26 20 34 20 78 Z" fill="#8A8D95"/>
-          <circle cx="0" cy="0" r="17" fill="#8A8D95"/>
-          <rect class="phone" x="15" y="34" width="13" height="22" rx="3" fill="#0F7C7A"/>
-        </g>
-
-        <!-- person B (nearby, also on Coast) -->
-        <g class="fig figB" transform="translate(345 190) scale(.92)">
-          <path d="M-20 78 C -20 34 -14 26 0 26 C 14 26 20 34 20 78 Z" fill="#A9ABB0"/>
-          <circle cx="0" cy="0" r="17" fill="#A9ABB0"/>
-          <rect class="phone" x="-28" y="34" width="13" height="22" rx="3" fill="#0F7C7A"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WHY COAST — you choose, with the app ================= -->
-<section class="shots">
-  <div class="wrap shots-grid">
-    <div class="shots-copy rise">
-      <p class="eyebrow">Why Coast</p>
-      <h2>You pick who. Not an algorithm.</h2>
-      <p class="shots-lead">Pooled rides assign you a stranger, sight unseen. On Coast you see them first &mdash; name, rating, route &mdash; and it&rsquo;s your call.</p>
-    </div>
-    <div class="phone rise" aria-hidden="true">
-      <div class="phone-frame">
-        <span class="phone-pill"></span>
-        <div class="phone-screen">
-          <img src="shots/detail.jpg" alt="Coast — trip detail card showing a ride to Rajiv Gandhi International Airport with a Request to Share Ride button" loading="lazy">
+      <div class="sheet" role="region" aria-live="polite" aria-label="Selected rider">
+        <p class="sheet__empty" data-view="empty">Tap a rider on the map to see where they're going.</p>
+        <div data-view="detail" hidden>
+          <div class="sheet__who">
+            <span class="avatar" data-f="initial"></span>
+            <span class="sheet__name" data-f="name"></span>
+            <span class="chip" data-f="tag" hidden>Women only</span>
+          </div>
+          <dl class="facts">
+            <div><dt>Going to</dt><dd data-f="to"></dd></div>
+            <div><dt>Leaving</dt><dd data-f="at"></dd></div>
+            <div><dt>Seats</dt><dd data-f="seats"></dd></div>
+          </dl>
+          <p class="sheet__note" data-f="note"></p>
+          <button class="btn btn--teal btn--block" type="button" data-f="action">Request to share ride</button>
         </div>
+        <p class="sheet__fine">Sample riders, so you can see how it works.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= BEAT 3 — how it works ================= -->
-<section class="beat">
+<!-- ================= WHAT'S DIFFERENT ================= -->
+<section class="band compare" aria-labelledby="compare-title">
   <div class="wrap">
-    <div class="beat-head rise">
-      <p class="eyebrow">How it works</p>
-      <h2>Post, match, ride.</h2>
+    <div class="compare__head">
+      <h2 class="band__title" id="compare-title">You pick who you ride with.</h2>
+      <p class="band__lede">Pooled rides put you in a car with whoever an algorithm chose. On Coast you see the people going your way first, with their name, rating and route, and it's your call.</p>
     </div>
-    <div class="steps steps-3 rise">
-      <div class="steps-line" aria-hidden="true"></div>
-      <div class="steps-row">
-        <div class="step">
-          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-          <h3>Post your trip</h3>
-          <p>destination, time, seats</p>
-        </div>
-        <div class="step">
-          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4M16.2 7.8a6 6 0 0 1 0 8.4M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></div>
-          <h3>Match with someone close</h3>
-          <p>they ask you, or you ask them</p>
-        </div>
-        <div class="step">
-          <div class="node"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19l1-5.8-4.3-4.1 5.9-.9L12 3Z"/></svg></div>
-          <h3>Ride together</h3>
-          <p>meet at the pin, rate each other after</p>
-        </div>
+    <table class="compare__table">
+      <caption>How Coast compares with most pooled ride apps</caption>
+      <thead>
+        <tr><th scope="col"><span class="sr-only">What</span></th><th scope="col">Most ride apps</th><th scope="col">Coast</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Who you ride with</th><td data-label="Most ride apps">Assigned for you</td><td data-label="Coast">You choose from people near you</td></tr>
+        <tr><th scope="row">Your location</th><td data-label="Most ride apps">Exact pickup point stored</td><td data-label="Coast">Moved 60 to 180 m before it's saved</td></tr>
+        <tr><th scope="row">Your phone number</th><td data-label="Most ride apps">Shared with the driver</td><td data-label="Coast">Private. You chat in the app and share a number only if you choose</td></tr>
+        <tr><th scope="row">The fare</th><td data-label="Most ride apps">Paid through the app, which keeps a cut</td><td data-label="Coast">Settled between you. Coast takes nothing</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PRIVACY ================= -->
+<section class="band privacy on-dark" id="privacy" aria-labelledby="privacy-title">
+  <div class="wrap privacy__grid">
+    <div>
+      <h2 class="band__title" id="privacy-title">Your location is blurred before we save it.</h2>
+      <p class="band__lede">Coast reads your position only while the app is open. Before a trip is stored, it's moved a random 60 to 180 metres, so even we can't see exactly where you are.</p>
+      <ul class="privacy__facts">
+        <li><strong>Foreground only.</strong> Coast never tracks you in the background.</li>
+        <li><strong>Your number stays private.</strong> Riders you match with chat with you in the app, and see your number only if you turn that on.</li>
+        <li><strong>Delete your account</strong> from the Profile tab and your profile, trips, ratings and history are removed right away.</li>
+      </ul>
+    </div>
+
+    <div class="fuzz">
+      <div class="fuzz__map">
+        <svg viewBox="0 0 200 200" role="img" aria-label="A map with your real position at the centre and a saved position somewhere between 60 and 180 metres away">
+          <path class="fuzz__street" d="M-5 58 L205 70"/>
+          <path class="fuzz__street" d="M-5 142 L205 128"/>
+          <path class="fuzz__street" d="M62 -5 L74 205"/>
+          <path class="fuzz__street" d="M146 -5 L132 205"/>
+          <circle class="fuzz__r180" cx="100" cy="100" r="92"/>
+          <circle class="fuzz__r60" cx="100" cy="100" r="30.6"/>
+          <text class="fuzz__ringlabel" x="100" y="65.5" text-anchor="middle">60 m</text>
+          <text class="fuzz__ringlabel" x="100" y="19" text-anchor="middle">180 m</text>
+          <circle class="fuzz__real" cx="100" cy="100" r="6"/>
+          <circle class="fuzz__saved" id="fuzz-saved" cx="100" cy="100" r="7.5"/>
+        </svg>
       </div>
+      <div class="fuzz__bar">
+        <p class="fuzz__read" id="fuzz-read" aria-live="polite">Saved about 120 m from the real spot.</p>
+        <button class="btn btn--line btn--small" type="button" id="fuzz-roll">Blur it again</button>
+      </div>
+      <p class="legend"><span><i class="l-real"></i>Where you actually are. Never stored.</span><span><i class="l-saved"></i>What Coast saves</span></p>
     </div>
   </div>
 </section>
 
-<!-- ================= BEAT 4 — yours stays yours ================= -->
-<section id="privacy" class="beat">
+<!-- ================= HOW IT WORKS ================= -->
+<section class="band" id="how" aria-labelledby="how-title">
   <div class="wrap">
-    <div class="beat-head rise">
-      <p class="eyebrow">Yours stays yours</p>
-      <h2>Built for getting in a car with a stranger.</h2>
-      <p class="beat-lead">The parts that matter aren't a promise in the copy — they're how the app is built.</p>
-    </div>
-    <div class="tiles rise">
-      <div class="tile">
-        <div class="fig">
-          <div class="fuzz-pin"><span class="ring"></span><span class="dot"></span><span class="m">60–180 m off</span></div>
-        </div>
-        <h3>Location stays fuzzy</h3>
-        <p>Every point is nudged 60–180 m before it's stored. Your exact position is never saved.</p>
+    <h2 class="band__title" id="how-title">How a ride comes together.</h2>
+    <ol class="steps">
+      <li class="step">
+        <h3>Post your trip</h3>
+        <p>Say where you're headed, when you're leaving, how many seats you have and roughly what the cab costs.</p>
+      </li>
+      <li class="step">
+        <h3>See who's near</h3>
+        <p>A live map shows people within 5 km going your way. Tap one to see their trip.</p>
+      </li>
+      <li class="step">
+        <h3>Send a request</h3>
+        <p>They accept or decline. Once they accept, you chat in the app. Numbers stay private unless someone chooses to share theirs.</p>
+      </li>
+      <li class="step">
+        <h3>Ride and rate</h3>
+        <p>Meet at the pin, split the fare, then rate each other from 1 to 5.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= SAFETY CONTROLS ================= -->
+<section class="band controls" aria-labelledby="controls-title">
+  <div class="wrap">
+    <h2 class="band__title" id="controls-title">Controls you'll actually use.</h2>
+    <div class="controls__grid">
+      <div class="control">
+        <h3>Match your own gender only</h3>
+        <p>Optional. When it's on, you only see riders of the same gender, and they only see you.</p>
       </div>
-      <div class="tile">
-        <div class="fig">
-          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#6FBFBC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4" fill="#6FBFBC"/></svg>
-        </div>
-        <h3>Number is gated</h3>
-        <p>Phone numbers appear only after you both agree — and only if they chose to share.</p>
+      <div class="control">
+        <h3>Block and report</h3>
+        <p>On every profile and on the match screen. Repeat reports against the same account suspend it automatically.</p>
       </div>
-      <div class="tile">
-        <div class="fig">
-          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#6FBFBC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 8.5h4.2a2.3 2.3 0 0 1 0 4.6H10M9 13h3M9 16l5-8"/></svg>
-        </div>
+      <div class="control">
+        <h3>Chat before you share a number</h3>
+        <p>Once a request is accepted, sort out the pickup inside Coast without handing out your phone number.</p>
+      </div>
+      <div class="control">
+        <h3>Ratings that are real</h3>
+        <p>Both people rate each other from 1 to 5 after the ride. There's no padded score.</p>
+      </div>
+      <div class="control">
+        <h3>Share your trip</h3>
+        <p>Send who you're riding with, where and when to someone you trust, in one tap.</p>
+      </div>
+      <div class="control">
         <h3>No money in the app</h3>
-        <p>Settle the fare between yourselves — cash, UPI, whatever. Coast takes no cut.</p>
+        <p>You settle the fare yourselves, with cash or UPI. Coast doesn't process it and doesn't take a cut.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section id="cta">
-  <div class="wrap box">
-    <p class="eyebrow">Early access</p>
-    <h2>Be one of the first to ride.</h2>
-    <p class="lead">Join the waitlist — we'll tell you the moment Coast is on the Play Store.</p>
-    <form id="cta-form" class="cta-form">
-      <div class="two">
-        <input type="text" id="wl-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
-        <input type="email" id="wl-email" placeholder="Email address" required autocomplete="email" aria-label="Email address" />
-      </div>
-      <input type="tel" id="wl-phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone, optional" />
-      <button type="submit" class="btn">Join the waitlist</button>
-      <p id="wl-message"></p>
-    </form>
-    <div class="cta-stats">
-      <span><span class="n" id="stat-count">—</span><span class="l">on the list</span></span>
-      <i></i>
-      <span><span class="n">Android</span><span class="l">first</span></span>
-      <i></i>
-      <span><span class="n">Free</span><span class="l">to use</span></span>
+<!-- ================= FAQ ================= -->
+<section class="band faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 class="band__title" id="faq-title">Questions riders ask.</h2>
+    <div class="faq__list">
+      <details>
+        <summary>Is Coast free?</summary>
+        <p>Yes. Installing and using Coast costs nothing, and Coast doesn't process or take a cut of your fare.</p>
+      </details>
+      <details>
+        <summary>Is Coast a taxi service?</summary>
+        <p>No. Coast doesn't employ drivers or dispatch cars. It helps people who are already making a trip find each other and share the cost.</p>
+      </details>
+      <details>
+        <summary>Will I find someone going my way?</summary>
+        <p>Coast works anywhere in India, but it can only match you with riders who are on it. It gets better with every person on your route, so bring a friend or a coworker who makes the same trip.</p>
+      </details>
+      <details>
+        <summary>Who can use it?</summary>
+        <p>Coast is for people aged 18 and over. Read the <a href="terms-of-service.html">terms of service</a> for the full rules.</p>
+      </details>
+      <details>
+        <summary>Is there an iPhone version?</summary>
+        <p>Not yet. Coast is on Android for now.</p>
+      </details>
+      <details>
+        <summary>How do I delete my account?</summary>
+        <p>Open the Profile tab in the app and delete your account there. Your profile, trips, ratings and history are removed right away. You can also follow the steps on the <a href="delete-account.html">delete account page</a>.</p>
+      </details>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap foot">
-    <a href="#" class="logo">Coast</a>
-    <nav>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="terms-of-service.html">Terms</a>
-      <a href="cookie-policy.html">Cookies</a>
-      <a href="delete-account.html">Delete account</a>
-      <a href="mailto:coastnowapp@gmail.com">coastnowapp@gmail.com</a>
-    </nav>
+<!-- ================= CLOSING ================= -->
+<section class="band closing on-dark" aria-labelledby="closing-title">
+  <div class="wrap">
+    <h2 class="closing__title" id="closing-title">Riding the same route every day? Bring one person.</h2>
+    <p class="closing__lede">Coast gets better with every rider on your route. Install it, then send it to the person you'd share a ride with.</p>
+    <div class="closing__cta">
+      <a class="btn btn--rick" href="https://play.google.com/store/apps/details?id=in.coastapp.app&amp;referrer=utm_source%3Dcoastapp.in%26utm_medium%3Dweb%26utm_campaign%3Dclosing">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.2v17.6a.9.9 0 0 0 1.35.78l15-8.8a.9.9 0 0 0 0-1.56l-15-8.8A.9.9 0 0 0 5 3.2Z"/></svg>
+        Get it on Google Play
+      </a>
+      <a class="btn btn--line" href="https://wa.me/?text=I%27m%20using%20Coast%20to%20find%20people%20going%20my%20way%20and%20split%20the%20ride.%20It%27s%20free%20on%20Android%3A%20https%3A%2F%2Fcoastapp.in%2F" target="_blank" rel="noopener">Send on WhatsApp</a>
+    </div>
   </div>
-  <div class="wrap foot-by">
-    <span>&copy; 2026 Coast</span>
-    <span>Built by <a href="https://github.com/praann07" target="_blank" rel="noopener">Praneeth</a></span>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__row">
+      <a class="logo" href="/">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+          <circle cx="16" cy="16" r="3.4" fill="currentColor" stroke="none"/>
+          <path d="M16 9.4a6.6 6.6 0 1 0 6.6 6.6" opacity=".85"/>
+          <path d="M16 3.8a12.2 12.2 0 1 0 12.2 12.2" opacity=".5"/>
+        </svg>
+        Coast
+      </a>
+      <nav class="site-foot__nav" aria-label="Footer">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <a href="delete-account.html">Delete account</a>
+        <a href="mailto:coastnowapp@gmail.com">coastnowapp@gmail.com</a>
+      </nav>
+    </div>
+    <div class="site-foot__fine">
+      <span>&copy; 2026 Coast. Made in India.</span>
+      <span>Built by <a href="https://github.com/praann07" target="_blank" rel="noopener">Praneeth</a></span>
+    </div>
   </div>
 </footer>
 
-<div id="toast" role="status" aria-live="polite"></div>
-
-<!-- Pinned + Subresource-Integrity checked: a hijacked CDN response can't
-     execute. Hash is for three@0.160.0 exactly — regenerate if the version
-     changes. If it ever fails to load, the hero degrades to its ink gradient. -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"
-        integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O"
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/config.js"></script>
-<script>
-(function () {
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var nav = document.getElementById('nav');
-  var hero = document.getElementById('hero');
-
-  /* ---- nav state ---- */
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) {
-      nav.classList.toggle('past-hero', !e[0].isIntersecting);
-    }, { rootMargin: '-70% 0px 0px 0px' }).observe(hero);
-
-    var rev = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); }
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.rise, .scene, .steps').forEach(function (el) { rev.observe(el); });
-  } else {
-    document.querySelectorAll('.rise, .scene, .steps').forEach(function (el) { el.classList.add('in'); });
-  }
-
-  /* ---- phone: tilt toward the cursor (desktop pointers only) ---- */
-  (function () {
-    var pf = document.querySelector('.phone-frame');
-    if (!pf || reduce || !window.matchMedia('(pointer:fine)').matches) return;
-    pf.addEventListener('pointermove', function (e) {
-      var r = pf.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width - 0.5;
-      var y = (e.clientY - r.top) / r.height - 0.5;
-      pf.style.animationPlayState = 'paused';
-      pf.style.transform = 'perspective(900px) rotateY(' + (x * 11).toFixed(2) + 'deg) rotateX(' + (-y * 11).toFixed(2) + 'deg) translateY(-4px)';
-    });
-    pf.addEventListener('pointerleave', function () {
-      pf.style.transform = '';
-      pf.style.animationPlayState = '';
-    });
-  })();
-
-  /* ---- waitlist count: tween 0 -> real number when the stats scroll in ---- */
-  var statsEl = document.querySelector('.cta-stats');
-  var waitCount = null, statsSeen = false;
-  function tweenCount(el, target) {
-    if (reduce || !target) { el.textContent = target || 0; return; }
-    var t0 = performance.now();
-    (function step(now) {
-      var p = Math.min((now - t0) / 1100, 1);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-  function maybeTween() {
-    var el = document.getElementById('stat-count');
-    if (statsSeen && typeof waitCount === 'number' && waitCount > 0 && el) tweenCount(el, waitCount);
-  }
-  if (statsEl && 'IntersectionObserver' in window) {
-    var so = new IntersectionObserver(function (e) {
-      if (e[0].isIntersecting) { statsSeen = true; so.disconnect(); maybeTween(); }
-    }, { threshold: 0.5 });
-    so.observe(statsEl);
-  }
-
-  /* ---- hero animation: two travellers converge onto a shared route ----
-     Deferred to window 'load': creating a WebGL context mid-parse can fail
-     transiently under load on some browsers. */
-  function startHeroAnim() {
-    var cv = document.getElementById('ribbon');
-    if (!cv || typeof THREE === 'undefined') return;
-    // Only skip on genuinely ancient / 1-2 core devices; phones run it fine.
-    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return;
-
-    var renderer;
-    try { renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true }); }
-    catch (e) { console.warn('[coast] hero animation disabled:', e && e.message); return; }
-
-    var W = hero.clientWidth, H = hero.clientHeight;
-    var narrow = W < 760;   // phone / portrait — lighter + re-framed
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, narrow ? 1.5 : 2));
-    renderer.setSize(W, H, false);
-
-    var FOG_OPEN = 0.036, FOG_DENSE = 0.14;
-    var scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0e0f13, FOG_DENSE);
-
-    // Desktop: framed to the right (copy sits left). Phone: wider FOV, pulled
-    // back and centred so the converging route reads behind the stacked text.
-    var camera = new THREE.PerspectiveCamera(narrow ? 54 : 44, W / H, 0.1, 100);
-    camera.position.set(narrow ? 0.3 : 0, narrow ? 0.15 : 0.5, narrow ? 7.6 : 6.1);
-    camera.lookAt(narrow ? 0.5 : 1.15, narrow ? 0.35 : 0.55, -1.8);
-
-    var group = new THREE.Group();
-    scene.add(group);
-
-    // Two approaches meet at MERGE (right of centre), then one route flows away.
-    var MERGE = new THREE.Vector3(1.45, 0.35, -0.9);
-    var curveL = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-2.7, -1.5, 3.4),
-      new THREE.Vector3(-1.4, -0.8, 2.1),
-      new THREE.Vector3(0.1, -0.25, 0.9),
-      new THREE.Vector3(0.95, 0.06, 0.0),
-      MERGE.clone()
-    ], false, 'catmullrom', 0.3);
-    var curveR = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(6.2, 1.9, 2.6),
-      new THREE.Vector3(4.4, 1.35, 1.5),
-      new THREE.Vector3(2.9, 0.85, 0.6),
-      new THREE.Vector3(2.0, 0.5, 0.05),
-      MERGE.clone()
-    ], false, 'catmullrom', 0.3);
-    var shared = new THREE.CatmullRomCurve3([
-      MERGE.clone(),
-      new THREE.Vector3(1.9, 0.7, -2.2),
-      new THREE.Vector3(2.5, 1.15, -4.2),
-      new THREE.Vector3(3.2, 1.7, -6.6),
-      new THREE.Vector3(4.2, 2.4, -9.4)
-    ], false, 'catmullrom', 0.4);
-
-    function flowTex(dim) {
-      var c = document.createElement('canvas'); c.width = 512; c.height = 4;
-      var x = c.getContext('2d'), g = x.createLinearGradient(0, 0, 512, 0);
-      var b = dim ? 'rgba(24,150,146,0.42)' : 'rgba(28,165,161,0.62)';
-      var m = dim ? 'rgba(120,225,222,0.5)' : 'rgba(140,235,232,0.85)';
-      var p = dim ? 'rgba(190,248,246,0.8)' : 'rgba(214,255,253,1)';
-      g.addColorStop(0.00, b); g.addColorStop(0.34, b);
-      g.addColorStop(0.44, m);
-      g.addColorStop(0.50, p);
-      g.addColorStop(0.56, m);
-      g.addColorStop(0.66, b); g.addColorStop(1.00, b);
-      x.fillStyle = g; x.fillRect(0, 0, 512, 4);
-      var t = new THREE.CanvasTexture(c);
-      t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(dim ? 3.0 : 2.2, 1);
-      return t;
-    }
-    function glowTex() {
-      var c = document.createElement('canvas'); c.width = c.height = 64;
-      var x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
-      g.addColorStop(0, 'rgba(255,255,255,1)');
-      g.addColorStop(0.26, 'rgba(155,242,238,0.7)');
-      g.addColorStop(1, 'rgba(155,242,238,0)');
-      x.fillStyle = g; x.fillRect(0, 0, 64, 64);
-      return new THREE.CanvasTexture(c);
-    }
-    var GT = glowTex();
-
-    function tube(curve, radius, opacity, tex) {
-      var opts = { transparent: true, opacity: opacity, depthWrite: false };
-      if (tex) opts.map = tex; else opts.color = 0x1f8f8c;
-      var m = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, radius, 12, false), new THREE.MeshBasicMaterial(opts));
-      group.add(m); return m;
-    }
-    var texL = flowTex(true), texR = flowTex(true), sTex = flowTex(false);
-    tube(curveL, 0.032, 0.6, texL);
-    tube(curveR, 0.032, 0.6, texR);
-    tube(shared, 0.058, 1.0, sTex);
-    tube(new THREE.CatmullRomCurve3(shared.points.map(function (p) {
-      var q = p.clone(); q.z -= 1.3; q.y += 0.6; q.x -= 0.4; return q;
-    }), false, 'catmullrom', 0.4), 0.02, 0.16, null);   // faint parallax echo (plain colour)
-
-    function traveller(hex) {
-      var g = new THREE.Group();
-      g.add(new THREE.Mesh(new THREE.SphereGeometry(0.055, 16, 16),
-        new THREE.MeshBasicMaterial({ color: hex, transparent: true })));
-      var halo = new THREE.Sprite(new THREE.SpriteMaterial({
-        map: GT, color: hex, transparent: true, opacity: 1,
-        depthWrite: false, blending: THREE.AdditiveBlending
-      }));
-      halo.scale.set(1.5, 1.5, 1); g.add(halo);
-      group.add(g);
-      return { g: g, halo: halo, core: g.children[0] };
-    }
-    var tA = traveller(0x38c6c2);   // teal  — matches the app-panel pin .p.l
-    var tB = traveller(0xf4f1ea);   // warm white — matches .p.r
-
-    var pulse = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: GT, color: 0xd6fffd, transparent: true, opacity: 0,
-      depthWrite: false, blending: THREE.AdditiveBlending
-    }));
-    pulse.position.copy(MERGE); pulse.scale.set(0.1, 0.1, 1); group.add(pulse);
-
-    var NP = narrow ? 34 : 70, pg = new THREE.BufferGeometry(), pArr = new Float32Array(NP * 3), pPh = new Float32Array(NP);
-    for (var i = 0; i < NP; i++) {
-      var b = (i % 2 ? curveR : shared).getPointAt(Math.random());
-      pArr[i*3]   = b.x + (Math.random() - 0.5) * 1.7;
-      pArr[i*3+1] = b.y + (Math.random() - 0.5) * 1.3;
-      pArr[i*3+2] = b.z + (Math.random() - 0.5) * 1.7;
-      pPh[i] = Math.random() * 6.283;
-    }
-    pg.setAttribute('position', new THREE.BufferAttribute(pArr, 3));
-    var pts = new THREE.Points(pg, new THREE.PointsMaterial({
-      size: 0.06, map: GT, color: 0x7fe0dc, transparent: true, opacity: 0.55,
-      depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true
-    }));
-    group.add(pts);
-
-    var tgx = 0, tgy = 0, mx = 0, my = 0;
-    if (!reduce) {
-      window.addEventListener('pointermove', function (e) {
-        tgx = e.clientX / window.innerWidth - 0.5;
-        tgy = e.clientY / window.innerHeight - 0.5;
-      }, { passive: true });
-    }
-    window.addEventListener('resize', function () {
-      W = hero.clientWidth; H = hero.clientHeight;
-      camera.aspect = W / H; camera.updateProjectionMatrix();
-      renderer.setSize(W, H, false);
-    });
-
-    var running = true, T = 0, intro = 0;
-    var INTRO = 70, CYCLE = 470, SPLIT = 0.6;
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (e) {
-        running = e[0].isIntersecting; if (running && !reduce) loop();
-      }).observe(hero);
-    }
-    document.addEventListener('visibilitychange', function () {
-      running = !document.hidden; if (running && !reduce) loop();
-    });
-
-    function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
-    function setOp(t, o) { t.halo.material.opacity = o; t.core.material.opacity = o; }
-
-    function frame() {
-      T += 1;
-      if (intro < INTRO) { intro++; scene.fog.density = FOG_DENSE + (FOG_OPEN - FOG_DENSE) * ease(intro / INTRO); }
-
-      mx += (tgx - mx) * 0.045; my += (tgy - my) * 0.045;
-      group.rotation.y = mx * 0.22;
-      group.rotation.x = my * 0.12 + Math.sin(T * 0.003) * 0.02;
-      group.position.y = Math.sin(T * 0.004) * 0.04;
-
-      sTex.offset.x -= 0.0022;
-      texL.offset.x -= 0.0013;
-      texR.offset.x -= 0.0013;
-
-      var c = (T % CYCLE) / CYCLE;
-      if (c <= SPLIT) {
-        var app = ease(Math.min(c / SPLIT, 1));
-        tA.g.position.copy(curveL.getPointAt(app));
-        tB.g.position.copy(curveR.getPointAt(app));
-        var inK = Math.min(c / 0.12, 1);              // fade in as they enter
-        setOp(tA, inK); setOp(tB, inK);
-      } else {
-        var sc = (c - SPLIT) / (1 - SPLIT);
-        tA.g.position.copy(shared.getPointAt(Math.min(sc, 1)));
-        setOp(tA, Math.max(0, 1 - sc));
-        setOp(tB, 0);
-      }
-
-      var pd = Math.abs(c - SPLIT), pk = pd < 0.05 ? 1 - pd / 0.05 : 0;
-      pulse.material.opacity = 0.9 * pk;
-      var ps = 0.12 + pk * 2.1; pulse.scale.set(ps, ps, 1);
-
-      var arr = pts.geometry.attributes.position.array;
-      for (var j = 0; j < NP; j++) arr[j*3+1] += Math.sin(T * 0.01 + pPh[j]) * 0.0016;
-      pts.geometry.attributes.position.needsUpdate = true;
-
-      renderer.render(scene, camera);
-    }
-
-    var raf = 0;
-    function loop() { cancelAnimationFrame(raf); if (!running) return; frame(); raf = requestAnimationFrame(loop); }
-
-    if (reduce) { scene.fog.density = FOG_OPEN; intro = INTRO; }
-    frame();                 // always paint one frame
-    if (!reduce) loop();     // animate only when motion is allowed
-  }
-  if (document.readyState === 'complete') startHeroAnim();
-  else window.addEventListener('load', startHeroAnim, { once: true });
-
-  /* ---- waitlist ---- */
-  var cfg = window.COAST_CONFIG || {};
-  var U = cfg.SUPABASE_URL, K = cfg.SUPABASE_ANON_KEY;
-  var toast = document.getElementById('toast'), toastT;
-  function showToast(m, t) {
-    toast.textContent = m; toast.className = t || '';
-    clearTimeout(toastT);
-    requestAnimationFrame(function () { toast.classList.add('show'); });
-    toastT = setTimeout(function () { toast.classList.remove('show'); }, 4000);
-  }
-  var heroForm = document.getElementById('hero-form');
-  var ctaForm = document.getElementById('cta-form');
-  var wlMsg = document.getElementById('wl-message');
-  var statCount = document.getElementById('stat-count');
-  var count = null;
-
-  if (!U || !K) {
-    if (wlMsg) wlMsg.textContent = 'Waitlist is warming up — check back shortly.';
-    return;
-  }
-  fetch(U + '/rest/v1/rpc/get_waitlist_count', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K },
-    body: '{}'
-  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
-    var n = typeof v === 'number' ? v : parseInt(v, 10);
-    if (!Number.isFinite(n) || !statCount) return;
-    count = n; waitCount = n;
-    if (statsSeen) maybeTween();          // already scrolled past — tween now
-    else statCount.textContent = '0';     // hold at 0 until the stats scroll into view
-  }).catch(function () {});
-
-  function submit(data) {
-    // Plain INSERT (no upsert) — an upsert would need the anon role to also
-    // hold SELECT+UPDATE on the table, which would expose everyone's email.
-    return fetch(U + '/rest/v1/waitlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K,
-        Prefer: 'return=minimal'
-      },
-      body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null })
-    }).then(function (res) {
-      if (res.ok) {
-        count = (count == null ? 0 : count) + 1;
-        if (statCount) statCount.textContent = count;
-        showToast("You're on the list. We'll email you at launch.");
-      } else if (res.status === 409) {
-        showToast("You're already on the list — see you at launch.");
-      } else { showToast('Something went wrong. Try again?', 'error'); }
-    }).catch(function () { showToast('Network error — check your connection.', 'error'); });
-  }
-  heroForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('hero-email').value.trim();
-    if (email) submit({ email: email }).then(function () { heroForm.reset(); });
-  });
-  ctaForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('wl-email').value.trim();
-    if (!email) return;
-    wlMsg.textContent = 'Joining…';
-    submit({
-      name: document.getElementById('wl-name').value.trim(),
-      email: email,
-      phone: document.getElementById('wl-phone').value.trim()
-    }).then(function () { ctaForm.reset(); wlMsg.textContent = ''; });
-  });
-})();
-</script>
+<script src="js/home.js"></script>
 </body>
 </html>

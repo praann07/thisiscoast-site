@@ -1,13 +1,17 @@
-# Coast — marketing site
+# Coast: marketing site
 
-Static site for [coastapp.in](https://coastapp.in). Served by GitHub Pages
+Static site for [coastapp.in](https://coastapp.in), served by GitHub Pages
 (Settings → Pages → Deploy from a branch → `main` / root).
 
-- `index.html` — landing page (self-contained: inline CSS/JS, Google Fonts)
-- `privacy-policy.html`, `terms-of-service.html`, `delete-account.html` — legal pages (Play Store requires the URLs)
-- `js/config.js` — Supabase URL + anon (publishable) key for the waitlist form. Public by design; RLS protects the data.
-- `CNAME` — custom domain
+- `index.html`: home page (uses `css/site.css`, `css/home.css`, `js/home.js`)
+- `privacy-policy.html`, `terms-of-service.html`, `cookie-policy.html`, `delete-account.html`: legal pages (Play Store requires these URLs)
+- `fonts/`: Bricolage Grotesque, self-hosted. The site makes no third-party requests.
+- `play-qr.svg`: QR code for the Play Store listing
+- `CNAME`: custom domain
 
-Local preview: `node serve.js` then open http://localhost:3000
+The waitlist was retired when the app launched on Google Play. The site no
+longer talks to Supabase.
 
-Source of truth for page content is this repo. The main app lives in a separate private repo.
+Local preview: `node serve.js`, then open http://localhost:3000
+
+Source of truth for the site is the `website/` folder in the private app repo.

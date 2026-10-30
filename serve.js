@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
   const mime = {
     '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript',
     '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml',
-    '.ico': 'image/x-icon', '.json': 'application/json'
+    '.ico': 'image/x-icon', '.json': 'application/json', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain'
   };
   fs.readFile(filePath, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }
