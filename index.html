@@ -127,6 +127,9 @@
       transition:background .15s var(--ease), transform .15s var(--ease);
     }
     .btn:hover { background:var(--teal-deep); transform:translateY(-1px); }
+    .play-btn { display:inline-block; text-decoration:none; padding:14px 26px; }
+    .cta-play { margin-top:28px; background:var(--ink); }
+    .cta-play:hover { background:#000; }
     .hero-foot {
       margin:14px 4px 0; font-size:12.5px; letter-spacing:.02em;
       color:rgba(255,255,255,.55);
@@ -379,7 +382,7 @@
 
 <nav id="nav">
   <a href="#" class="logo">Coast</a>
-  <a href="#cta" class="nav-cta">Join waitlist</a>
+  <a href="https://play.google.com/store/apps/details?id=in.coastapp.app" class="nav-cta" target="_blank" rel="noopener">Get the app</a>
 </nav>
 
 <!-- ================= HERO ================= -->
@@ -389,13 +392,10 @@
     <p class="eyebrow">Ride sharing · India</p>
     <h1 class="hero-title">Someone's already going <em>your way.</em></h1>
     <p class="hero-sub">See who's headed where you're headed, right now, near you. Pick who to ride with and split the fare.</p>
-    <form id="hero-form" class="hero-form">
-      <div class="field">
-        <input type="email" id="hero-email" placeholder="you@email.com" required autocomplete="email" aria-label="Email address" />
-        <button type="submit" class="btn">Get early access</button>
-      </div>
-      <p class="hero-foot">Android · launching soon · one email, no spam</p>
-    </form>
+    <div class="hero-form">
+      <a class="btn play-btn" href="https://play.google.com/store/apps/details?id=in.coastapp.app" target="_blank" rel="noopener">Get it on Google Play</a>
+      <p class="hero-foot">Android · available now · free to use</p>
+    </div>
   </div>
   <a href="#idea" class="scrollcue" aria-label="Skip to content"><i></i>Scroll</a>
 </header>
@@ -529,20 +529,12 @@
 <!-- ================= CTA ================= -->
 <section id="cta">
   <div class="wrap box">
-    <p class="eyebrow">Early access</p>
-    <h2>Be one of the first to ride.</h2>
-    <p class="lead">Join the waitlist — we'll tell you the moment Coast is on the Play Store.</p>
-    <form id="cta-form" class="cta-form">
-      <div class="two">
-        <input type="text" id="wl-name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
-        <input type="email" id="wl-email" placeholder="Email address" required autocomplete="email" aria-label="Email address" />
-      </div>
-      <input type="tel" id="wl-phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone, optional" />
-      <button type="submit" class="btn">Join the waitlist</button>
-      <p id="wl-message"></p>
-    </form>
+    <p class="eyebrow">Now on Google Play</p>
+    <h2>Ready to ride?</h2>
+    <p class="lead">Coast is live on the Play Store. Install it, post where you're going, and see who's already headed your way.</p>
+    <a class="btn play-btn cta-play" href="https://play.google.com/store/apps/details?id=in.coastapp.app" target="_blank" rel="noopener">Get it on Google Play</a>
     <div class="cta-stats">
-      <span><span class="n" id="stat-count">—</span><span class="l">on the list</span></span>
+      <span><span class="n">Live</span><span class="l">on Google Play</span></span>
       <i></i>
       <span><span class="n">Android</span><span class="l">first</span></span>
       <i></i>
@@ -568,15 +560,12 @@
   </div>
 </footer>
 
-<div id="toast" role="status" aria-live="polite"></div>
-
 <!-- Pinned + Subresource-Integrity checked: a hijacked CDN response can't
      execute. Hash is for three@0.160.0 exactly — regenerate if the version
      changes. If it ever fails to load, the hero degrades to its ink gradient. -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"
         integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/config.js"></script>
 <script>
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -615,29 +604,6 @@
       pf.style.animationPlayState = '';
     });
   })();
-
-  /* ---- waitlist count: tween 0 -> real number when the stats scroll in ---- */
-  var statsEl = document.querySelector('.cta-stats');
-  var waitCount = null, statsSeen = false;
-  function tweenCount(el, target) {
-    if (reduce || !target) { el.textContent = target || 0; return; }
-    var t0 = performance.now();
-    (function step(now) {
-      var p = Math.min((now - t0) / 1100, 1);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-  function maybeTween() {
-    var el = document.getElementById('stat-count');
-    if (statsSeen && typeof waitCount === 'number' && waitCount > 0 && el) tweenCount(el, waitCount);
-  }
-  if (statsEl && 'IntersectionObserver' in window) {
-    var so = new IntersectionObserver(function (e) {
-      if (e[0].isIntersecting) { statsSeen = true; so.disconnect(); maybeTween(); }
-    }, { threshold: 0.5 });
-    so.observe(statsEl);
-  }
 
   /* ---- hero animation: two travellers converge onto a shared route ----
      Deferred to window 'load': creating a WebGL context mid-parse can fail
@@ -846,74 +812,6 @@
   if (document.readyState === 'complete') startHeroAnim();
   else window.addEventListener('load', startHeroAnim, { once: true });
 
-  /* ---- waitlist ---- */
-  var cfg = window.COAST_CONFIG || {};
-  var U = cfg.SUPABASE_URL, K = cfg.SUPABASE_ANON_KEY;
-  var toast = document.getElementById('toast'), toastT;
-  function showToast(m, t) {
-    toast.textContent = m; toast.className = t || '';
-    clearTimeout(toastT);
-    requestAnimationFrame(function () { toast.classList.add('show'); });
-    toastT = setTimeout(function () { toast.classList.remove('show'); }, 4000);
-  }
-  var heroForm = document.getElementById('hero-form');
-  var ctaForm = document.getElementById('cta-form');
-  var wlMsg = document.getElementById('wl-message');
-  var statCount = document.getElementById('stat-count');
-  var count = null;
-
-  if (!U || !K) {
-    if (wlMsg) wlMsg.textContent = 'Waitlist is warming up — check back shortly.';
-    return;
-  }
-  fetch(U + '/rest/v1/rpc/get_waitlist_count', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K },
-    body: '{}'
-  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
-    var n = typeof v === 'number' ? v : parseInt(v, 10);
-    if (!Number.isFinite(n) || !statCount) return;
-    count = n; waitCount = n;
-    if (statsSeen) maybeTween();          // already scrolled past — tween now
-    else statCount.textContent = '0';     // hold at 0 until the stats scroll into view
-  }).catch(function () {});
-
-  function submit(data) {
-    // Plain INSERT (no upsert) — an upsert would need the anon role to also
-    // hold SELECT+UPDATE on the table, which would expose everyone's email.
-    return fetch(U + '/rest/v1/waitlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', apikey: K, Authorization: 'Bearer ' + K,
-        Prefer: 'return=minimal'
-      },
-      body: JSON.stringify({ name: data.name || null, email: data.email, phone: data.phone || null })
-    }).then(function (res) {
-      if (res.ok) {
-        count = (count == null ? 0 : count) + 1;
-        if (statCount) statCount.textContent = count;
-        showToast("You're on the list. We'll email you at launch.");
-      } else if (res.status === 409) {
-        showToast("You're already on the list — see you at launch.");
-      } else { showToast('Something went wrong. Try again?', 'error'); }
-    }).catch(function () { showToast('Network error — check your connection.', 'error'); });
-  }
-  heroForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('hero-email').value.trim();
-    if (email) submit({ email: email }).then(function () { heroForm.reset(); });
-  });
-  ctaForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('wl-email').value.trim();
-    if (!email) return;
-    wlMsg.textContent = 'Joining…';
-    submit({
-      name: document.getElementById('wl-name').value.trim(),
-      email: email,
-      phone: document.getElementById('wl-phone').value.trim()
-    }).then(function () { ctaForm.reset(); wlMsg.textContent = ''; });
-  });
 })();
 </script>
 </body>
