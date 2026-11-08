@@ -193,6 +193,8 @@
     .sky, .wl { position:absolute; left:0; top:0; width:100%; height:100%; }
     .wl { overflow:visible; will-change:transform; }
     .sky { will-change:opacity; }
+    /* The pulsing windows and phone glow live inside the wide mid and road layers. Without their own layers, every pulse re-rasterises the whole wide layer. */
+    .tw1, .tw2, .tw3, .phone-glow { will-change:opacity; }
     .sky-dusk { background:linear-gradient(to bottom, var(--w-dusk-1) 0%, var(--w-dusk-2) 34%, var(--w-dusk-3) 48%, var(--w-dusk-4) 58%, var(--w-dusk-5) 66%, var(--w-dusk-5) 100%); }
     .sky-night { opacity:0; background:linear-gradient(to bottom, var(--w-night-1) 0%, var(--w-night-2) 45%, var(--w-night-3) 66%, var(--w-night-3) 100%); }
     .sky-dawn { opacity:0; background:linear-gradient(to bottom, var(--w-dawn-1) 0%, var(--w-dawn-2) 36%, var(--w-dawn-3) 52%, var(--w-dawn-4) 62%, var(--w-dawn-5) 100%); }
