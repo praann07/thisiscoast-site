@@ -61,7 +61,7 @@
       --ghost-hover:rgba(244,242,237,.12);
       --ghost-press:rgba(244,242,237,.2);
       --rule-dark:rgba(244,242,237,.14);
-      --nav-paper:rgba(246,244,241,.94);
+      --nav-paper:var(--paper);
       --bezel:#1C202A;
       --bezel-edge:rgba(244,242,237,.1);
       --screen:#07090D;
@@ -230,6 +230,7 @@
     .at-ax { transform:translate(1250px,0); }
     @media (max-aspect-ratio:1/1) {
       #world { height:68svh; }
+      #world::after { content:""; position:absolute; inset:auto 0 0 0; height:16%; background:linear-gradient(to bottom, transparent, var(--ink)); }
       .at-ax { transform:translate(960px,0); }
     }
     main, footer { position:relative; z-index:1; }
@@ -631,8 +632,12 @@
   }, { passive: true });
   navTheme();
 
+  /* Landscape phones are too short for the pinned story (text falls below the fold), so they get the stacked page too. */
+  var short = window.matchMedia('(max-height: 520px)');
+  if (short.addEventListener) short.addEventListener('change', function () { location.reload(); });
+
   /* Without GSAP, or with reduced motion, the page stays a calm stacked page over a still street. */
-  if (reduce || !window.gsap || !window.ScrollTrigger || !world) return;
+  if (reduce || short.matches || !window.gsap || !window.ScrollTrigger || !world) return;
 
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
